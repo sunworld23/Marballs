@@ -1,3 +1,14 @@
+/*************************************************************
+ * decimal_precision.h
+ * -------------
+ * Header file that defines the engine's decimal precision.
+ *
+ * Last Revision: Sept. 19, 2014
+ *
+ * TO DO: - Continue following tutorial to fill this out?
+ *		  - This bullet included for to do list formatting.
+ *************************************************************/
+
 /********************************************************
  * #include guards to protect against double inclusions
  * when using header files
