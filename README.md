@@ -1,4 +1,4 @@
 Marballs
 ========
 
-Make sure when updating, use the git pull command first to be updated
+Before you make any changes to a file, use the pull command to get the most up to date versions of the file.
