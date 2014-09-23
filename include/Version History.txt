@@ -1,0 +1,19 @@
+====================================================================================================
+                                    ~ ~ ~ VERSION HISTORY ~ ~ ~ 
+====================================================================================================
+
+Sept. 22, 2014:
+	- Kyle updated engine_core.h with content up to the beginning of Chapter 3 (pg. 42-43 of tutorial).
+	- Added particle.h for someone to fill when they get the chance.
+	- Version History exists.
+	- README.md actually contains useful information.
+	
+Sept. 19, 2014:
+	- Kyle reformatted comments to be nitpicky and clean.
+	
+Sept. 17, 2014:
+	- Chris updated and renamed Engine_Core.h to engine_core.h.
+	- Chris updated and renamed Decimal_Precision.h to decimal_precision.h.
+	
+Sept. 15, 2014:
+	- Charlie performs the initial commit. Mr. Sun says, "Let there be light."
