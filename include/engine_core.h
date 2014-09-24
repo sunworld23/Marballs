@@ -47,7 +47,7 @@ namespace marballs
             Vector3() : x(0), y(0), z(0);
 
             // Vector3 - Constructor that initializes x, y, and z.
-            vector3(marb x, marb y, marb z) : x(x), y(y), z(z);
+            Vector3(marb x, marb y, marb z) : x(x), y(y), z(z);
 
             // invert - Inverts a Vector3's x, y, and z values.
             Vector3 invert() {
