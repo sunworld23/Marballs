@@ -53,10 +53,11 @@ namespace marballs
         *     Function Declarations
         *********************************/
         public:
-            /****************************************************
-            * TO DO: - add in the integrator header and implement
-            *          the function in a .cpp file (page 50).
-            *****************************************************/
+            /*************************************
+             * integrate - function integrates   *
+             * the particle forward in time.     *
+             *************************************/
+            void integrate(marb duration);
 
     }; // Particle class end
 } // marballs namespace end
