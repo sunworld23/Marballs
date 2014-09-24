@@ -22,7 +22,7 @@
 
 namespace marballs
 {
-    /* CLASS vector3 - Holds the values for a 3D vector */
+    /* CLASS Vector3 - Holds the values for a 3D vector */
     class Vector3
     {
         /*********************************
@@ -43,14 +43,14 @@ namespace marballs
         *********************************/
         public:
 
-            // vector3 - Default Constructor
-            vector3() : x(0), y(0), z(0);
+            // Vector3 - Default Constructor
+            Vector3() : x(0), y(0), z(0);
 
-            // vector3 - Constructor that initializes x, y, and z.
+            // Vector3 - Constructor that initializes x, y, and z.
             vector3(marb x, marb y, marb z) : x(x), y(y), z(z);
 
-            // invert - Inverts a vector3's x, y, and z values.
-            vector3 invert() {
+            // invert - Inverts a Vector3's x, y, and z values.
+            Vector3 invert() {
                 x = -x;
                 y = -y;
                 z = -z;
@@ -99,7 +99,7 @@ namespace marballs
 			}
 
 			// addScaledVector - Adds a given vector to this, scaled by a scalar.
-			void addScaledVector(const vector3& vector, real scalar) {
+			void addScaledVector(const Vector3& vector, real scalar) {
 				x += vector.x * scalar;
 				y += vector.y * scalar;
 				z += vector.z * scalar;
