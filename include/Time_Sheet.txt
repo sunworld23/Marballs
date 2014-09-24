@@ -1,0 +1,9 @@
+====================================================================================================
+                                    ~ ~ ~ TIME SHEET ~ ~ ~ 
+====================================================================================================
+
+Keep track of the time that you worked on a task and how far you got (i.e. "I finished the task in..." or
+"I didn't finish the task but got up to page...")
+
+Date:
+	- how much you finished and how long it took
