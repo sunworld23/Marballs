@@ -10,6 +10,11 @@
 		- Time sheet created, start keeping track of how long tasks take you and total work time
 		- Version history needs to be updated at the end of a day when changes are made
 		- Regular working times need to be set up when tasks become assigned. Possible pair programming in the future.
+
+	Brenton(3 hours total):
+	(5 min) - Updated particle.h and initialized the integrate function.
+	(55 min) - Implementation of integrate function in particle.cpp / Learned to use Github application.
+	(120 min) - Debugging / Testing (Tried using completed files from author’s Github for Chapter 4 test scenario).
 		
 	Chris (1 hour total):
 	(40 min) - Read and started to implement the particle.h header file, did not get to the integrator
