@@ -5,5 +5,9 @@
 Keep track of the time that you worked on a task and how far you got (i.e. "I finished the task in..." or
 "I didn't finish the task but got up to page...")
 
-Date:
-	- how much you finished and how long it took
+9/24/2014:
+	Chris (1 hour total):
+	(40 min) - started to implement the particle.h header file, did not get to the integrator
+	(5  min) - created the particle.cpp source file, just head comments
+	(5  min) - fixed the engine_core.h, capitalized all Vector3 functions and class name
+	(10 min) - created marballs.h header file, a global include that simply includes all of the headers we create
