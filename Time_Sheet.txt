@@ -2,9 +2,6 @@
                                     ~ ~ ~ TIME SHEET ~ ~ ~ 
 ====================================================================================================
 
-Keep track of the time that you worked on a task and how far you got (i.e. "I finished the task in..." or
-"I didn't finish the task but got up to page...")
-
 9/24/2014:
 	Chris (1 hour total):
 	(40 min) - started to implement the particle.h header file, did not get to the integrator
