@@ -57,7 +57,7 @@ namespace marballs
              * integrate - function integrates   *
              * the particle forward in time.     *
              *************************************/
-            void integrate(marb duration);
+            void Integrate(marb duration);
 
     }; // Particle class end
 } // marballs namespace end
