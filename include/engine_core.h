@@ -18,7 +18,8 @@
 #define ENGINE_CORE_INCLUDED
 
 #include <math.h>
-#include "marballs.h"
+#include "decimal_precision.h"
+#include <iostream>
 
 namespace marballs
 {
@@ -44,34 +45,46 @@ namespace marballs
         public:
 
             // Vector3 - Default Constructor
-            Vector3() : x(0), y(0), z(0);
+            Vector3() : x(0), y(0), z(0) {}
 
             // Vector3 - Constructor that initializes x, y, and z.
-            Vector3(marb x, marb y, marb z) : x(x), y(y), z(z);
+            Vector3(marb x, marb y, marb z) : x(x), y(y), z(z) {}
 
             // invert - Inverts a Vector3's x, y, and z values.
-            Vector3 invert() {
+            void invert() {
                 x = -x;
                 y = -y;
                 z = -z;
             }
 
 			// magnitude - Returns the magnitude (length) of this vector.
-			real magnitude() const {
+			marb magnitude() const {
 				return marb_sqrt(x*x+y*y+z*z);
 			}
 
 			// squareMagnitude - Returns the squared magnitude of this vector.
-			real squareMagnitude() const {
+			marb squareMagnitude() const {
 				return x*x+y*y+z*z;
 			}
 
 			// normalize - Changes vector's magnitude to 1 while maintaining direction.
 			void normalize() {
-				real length = magnitude();
+				marb length = magnitude();
 				if (length > 0) {
-					(*this)*=((real)1)/length; // Multiplies vector by reciprocal of its length.
+					(*this)*=((marb)1)/length; // Multiplies vector by reciprocal of its length.
 				}
+			}
+
+			// *= Operater overload - multiplies vector by a scalar value
+			void operator*=(const marb scalar) {
+                x *= scalar;
+                y *= scalar;
+                z *= scalar;
+			}
+
+			// Vector3 operator* - returns a copy of this Vector3 multiplied by a scalar
+			Vector3 operator*(const marb scalar) {
+                return Vector3(x*scalar, y*scalar, z*scalar);
 			}
 
 			// += Operator Overload - Adds vector components to this vector.
@@ -99,7 +112,7 @@ namespace marballs
 			}
 
 			// addScaledVector - Adds a given vector to this, scaled by a scalar.
-			void addScaledVector(const Vector3& vector, real scalar) {
+			void addScaledVector(const Vector3& vector, marb scalar) {
 				x += vector.x * scalar;
 				y += vector.y * scalar;
 				z += vector.z * scalar;
@@ -119,14 +132,14 @@ namespace marballs
 
 			// dotProduct - Calculates and returns the dot product of this vector and the given one.
 			// Used for determining if vectors are perpendicular, and what the angle is between them.
-			real dotProduct(const Vector3 &vector) const {
+			marb dotProduct(const Vector3 &vector) const {
 				return x*vector.x + y*vector.y + z*vector.z; // Returns a number, not a vector!
 			}
 
-			// scalarProduct - See: dotProduct
-			real scalarProduct(const Vector3 &vector) const {
+			// scalarProduct - See: dotProduct, commented out because it is the same as dotProduct
+			/*marb scalarProduct(const Vector3 &vector) const {
 				return dotProduct(vector);
-			}
+			}*/
 
 			/* NOTE: Avoiding inclusion of overloaded * because * is a confusing operator as is because pointers. */
 
@@ -139,10 +152,18 @@ namespace marballs
 							   x * vector.y - y * vector.x);
 			}
 
-			// vectorProduct - See: crossProduct
-			Vector3 vectorProduct(const Vector3 &vector) const {
+			// vectorProduct - See: crossProduct, commented out since it is the same as cross product
+			/*Vector3 vectorProduct(const Vector3 &vector) const {
 				return crossProduct(vector);
+			}*/
+
+			// overload << operator - To help with testing and getting values of Vector3
+            //                      - must be friend function since it takes user defined argument
+			friend std::ostream &operator<<(std::ostream &os, const Vector3 v) {
+                os << "<" << v.x << ", " << v.y << ", " << v.z << ">";
+                return os;
 			}
+
     }; // Vector3 class end
 } // marballs namespace end
 
