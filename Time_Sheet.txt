@@ -4,7 +4,7 @@
 
 9/24/2014:
 	Chris (1 hour total):
-	(40 min) - started to implement the particle.h header file, did not get to the integrator
+	(40 min) - Read and started to implement the particle.h header file, did not get to the integrator
 	(5  min) - created the particle.cpp source file, just head comments
 	(5  min) - fixed the engine_core.h, capitalized all Vector3 functions and class name
 	(10 min) - created marballs.h header file, a global include that simply includes all of the headers we create
