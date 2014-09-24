@@ -22,4 +22,5 @@
 	(5  min) - fixed the engine_core.h, capitalized all Vector3 functions and class name
 	(10 min) - created marballs.h header file, a global include that simply includes all of the headers we create
 	(40 min) - in engine_core.h, changed type real to type marb, added in function to overload * and << operators,
-		   tested functions is engine_core.h and everything seems to be working for now.
+		   tested functions is engine_core.h and everything seems to be working for now. **Note** formatting on
+		   GitHub seems messed up, but it looks fine in CodeBlocks.
