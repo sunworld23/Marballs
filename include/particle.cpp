@@ -26,5 +26,5 @@ void Particle::Integrate(marb duration)
     
     velocity.addScaledVector(resultingAcc, duration); //Update linear velocity from the acceleration.
     
-    velocity *= real_pow(damping, duration); //Inflicts drag on the object
+    velocity *= marb_pow(damping, duration); //Inflicts drag on the object
 }
