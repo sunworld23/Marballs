@@ -2,6 +2,10 @@
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
 
+Sept. 24, 2014:
+	-Chris fixed engine_core.h, a few bugs existed
+	-Time sheet folder exists, separated by months
+	
 Sept. 22, 2014:
 	- Kyle updated engine_core.h with content up to the beginning of Chapter 3 (pg. 42-43 of tutorial).
 	- Added particle.h for someone to fill when they get the chance.
