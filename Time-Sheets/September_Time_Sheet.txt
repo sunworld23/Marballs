@@ -1,6 +1,12 @@
-====================================================================================================
+﻿====================================================================================================
                                     ~ ~ ~ SEPTEMBER TIME SHEET ~ ~ ~ 
 ====================================================================================================
+
+9/28/2014:
+	Kyle (6 hours total):
+	(180 min) - Determining and experimenting with implementation of main.cpp and fireworks.cpp.
+	(160 min) - Adapting author's source code and updating particle.h/particle.cpp to work with the demo.	
+	(20  min) - Miscellaneous maintenance, notation, and reading.
 
 9/24/2014:
 	Group (15 min):
@@ -12,8 +18,8 @@
 		- Regular working times need to be set up when tasks become assigned. Possible pair programming in the future.
 
 	Brenton(3 hours total):
-	(5 min) - Updated particle.h and initialized the integrate function.
-	(55 min) - Implementation of integrate function in particle.cpp / Learned to use Github application.
+	(5 min)   - Updated particle.h and initialized the integrate function.
+	(55 min)  - Implementation of integrate function in particle.cpp / Learned to use Github application.
 	(120 min) - Debugging / Testing (Tried using completed files from author’s Github for Chapter 4 test scenario).
 		
 	Chris (1 hour 40 min total):

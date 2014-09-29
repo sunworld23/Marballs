@@ -32,7 +32,7 @@ namespace marballs
      * functions and constants. This lets the engine switch between single
      * and double precision easier.
     **/
-    
+
     #if 0
         #define SINGLE_PRECISION
         typedef float marb;

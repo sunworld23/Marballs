@@ -4,7 +4,7 @@
  * Header file for the physics engine core. Defines
  * vectors and their functions.
  *
- * Last Revision: Sept. 24, 2014
+ * Last Revision: Sept. 28, 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *		  - This bullet included for to do list formatting.
@@ -35,6 +35,8 @@ namespace marballs
             marb y; // Holds the y-axis value
             marb z; // Holds the z-access value
 
+            const static Vector3 GRAVITY; // Holds constant gravity value.
+
         private:
 
             marb pad; // From book: Padding variable for memory performance, optional.
@@ -50,30 +52,33 @@ namespace marballs
             // Vector3 - Constructor that initializes x, y, and z.
             Vector3(marb x, marb y, marb z) : x(x), y(y), z(z) {}
 
-            // invert - Inverts a Vector3's x, y, and z values.
-            void invert() {
+            // Invert - Inverts a Vector3's x, y, and z values.
+            void Invert() {
                 x = -x;
                 y = -y;
                 z = -z;
             }
 
-			// magnitude - Returns the magnitude (length) of this vector.
-			marb magnitude() const {
+			// Magnitude - Returns the magnitude (length) of this vector.
+			marb Magnitude() const {
 				return marb_sqrt(x*x+y*y+z*z);
 			}
 
-			// squareMagnitude - Returns the squared magnitude of this vector.
-			marb squareMagnitude() const {
+			// SquareMagnitude - Returns the squared magnitude of this vector.
+			marb SquareMagnitude() const {
 				return x*x+y*y+z*z;
 			}
 
-			// normalize - Changes vector's magnitude to 1 while maintaining direction.
-			void normalize() {
-				marb length = magnitude();
+			// Normalize - Changes vector's magnitude to 1 while maintaining direction.
+			void Normalize() {
+				marb length = Magnitude();
 				if (length > 0) {
 					(*this)*=((marb)1)/length; // Multiplies vector by reciprocal of its length.
 				}
 			}
+
+			// Clear - Zeros all components of vector.
+			void Clear() { x = y = z = 0; }
 
 			// *= Operater overload - multiplies vector by a scalar value
 			void operator*=(const marb scalar) {
@@ -82,7 +87,8 @@ namespace marballs
                 z *= scalar;
 			}
 
-			// Vector3 operator* - returns a copy of this Vector3 multiplied by a scalar
+			/* NOTE: Previously avoided inclusion of overloaded * because pointers, use this carefully. */
+			// * Operator Overload - returns a copy of this Vector3 multiplied by a scalar
 			Vector3 operator*(const marb scalar) {
                 return Vector3(x*scalar, y*scalar, z*scalar);
 			}
@@ -136,12 +142,14 @@ namespace marballs
 				return x*vector.x + y*vector.y + z*vector.z; // Returns a number, not a vector!
 			}
 
-			// scalarProduct - See: dotProduct, commented out because it is the same as dotProduct
-			/*marb scalarProduct(const Vector3 &vector) const {
+			// scalarProduct - See: dotProduct
+			// NOTE: Leaving it in as a deprecated function with a suggestion to use the other.
+			// 		 This way, people following the guide may use this without confusion, but are
+			//		 pointed in the right direction.
+			marb scalarProduct(const Vector3 &vector) const {
+				std::cout << "[DEBUG] (engine_core.h) Use dotProduct() instead!" << std::endl;
 				return dotProduct(vector);
-			}*/
-
-			/* NOTE: Avoiding inclusion of overloaded * because * is a confusing operator as is because pointers. */
+			}
 
 			// crossProduct - Calculates and returns the cross product of this vector and the given one.
 			// Used for calculating normal vectors, and determining if vectors are parallel.
@@ -152,10 +160,14 @@ namespace marballs
 							   x * vector.y - y * vector.x);
 			}
 
-			// vectorProduct - See: crossProduct, commented out since it is the same as cross product
-			/*Vector3 vectorProduct(const Vector3 &vector) const {
+			// vectorProduct - See: crossProduct
+			// NOTE: Leaving it in as a deprecated function with a suggestion to use the other.
+			// 		 This way, people following the guide may use this without confusion, but are
+			//		 pointed in the right direction.
+			Vector3 vectorProduct(const Vector3 &vector) const {
+				std::cout << "[DEBUG] (engine_core.h) Use crossProduct() instead!" << std::endl;
 				return crossProduct(vector);
-			}*/
+			}
 
 			// overload << operator - To help with testing and getting values of Vector3
             //                      - must be friend function since it takes user defined argument

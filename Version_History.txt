@@ -2,10 +2,19 @@
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
 
+Sept. 28, 2014:
+	- Kyle cobbled together the fireworks demo of the particle physics engine.
+	- app.h/cpp, timing.h/cpp, main.cpp, and random.h/cpp adapted directly from author source code.
+	- Consequently, particle.h's and particle.cpp's developments are mostly completed.
+	- engine_core.cpp created. Currently only defines gravity constant.
+	- Retained header file position in include folder. Moved cpp's to new "src" folder.
+	- Updated some function names and comments.
+	- Tutorial-wise, left off roughly around page 72 of the book (95 of the .pdf).
+
 Sept. 24, 2014:
-	-Chris fixed engine_core.h, a few bugs existed
-	-Time sheet folder exists, separated by months
-	-Brenton implemented the rest of chapter 3 particle.h file
+	- Chris fixed engine_core.h, a few bugs existed
+	- Time sheet folder exists, separated by months
+	- Brenton implemented the rest of chapter 3 particle.h file
 	
 Sept. 22, 2014:
 	- Kyle updated engine_core.h with content up to the beginning of Chapter 3 (pg. 42-43 of tutorial).
