@@ -2,6 +2,11 @@
                                     ~ ~ ~ SEPTEMBER TIME SHEET ~ ~ ~ 
 ====================================================================================================
 
+9/28/2014:
+	Kyle (6 hours total):
+	(180 min) - Determining and experimenting with implementation of main.cpp and fireworks.cpp.
+	(160 min) - Adapting author's source code and updating particle.h/particle.cpp to work with the demo.
+	(20  min) - Miscellaneous maintenance, notation, and reading.
 9/24/2014:
 	Group (15 min):
 	(Meeting) Topics discussed:
