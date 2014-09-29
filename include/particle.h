@@ -4,7 +4,7 @@
  * Header file that defines the simplest physics simulated object.
  * Particle class is not to be confused with particle physics.
  *
- * Last Revision: Sept. 28, 2014
+ * Last Revision: Sept. 29, 2014
  *
  * TO DO: - Polish formatting. This file's mostly done.
  *************************************************************/
@@ -70,7 +70,7 @@ namespace marballs
             Vector3 GetAcceleration() const;
 
             /**********************************************************************************
-            * END OF SETTER AND GETTER FUNCTION (AVOID USING IF POSSIBLE)
+            * END OF SETTER AND GETTER FUNCTION (AVOID USING SETTERS IF POSSIBLE)
             ***********************************************************************************/
 
             bool HasFiniteMass() const;

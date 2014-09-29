@@ -4,7 +4,7 @@
  * Source file that will implement our particle header file.
  * Particle class is not to be confused with particle physics.
  *
- * Last Revision: Sept. 28, 2014
+ * Last Revision: Sept. 29, 2014
  *
  * TO DO: - Polish formatting, this file's close to done.
  *************************************************************/
@@ -21,8 +21,8 @@ void Particle::Integrate(marb duration)
 
     position.addScaledVector(velocity, duration); // Updates linear position.
 
-    // Calculates how far the particle should move based on acceleration
-    Vector3 resultingAcc = acceleration;
+    // Work out the acceleration from the force.
+    Vector3 resultingAcc = acceleration; 
     resultingAcc.addScaledVector(forceAccum, inverseMass);
 
     velocity.addScaledVector(resultingAcc, duration); // Update linear velocity based on the calculated acceleration.
