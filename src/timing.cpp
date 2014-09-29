@@ -2,7 +2,7 @@
  * MOSTLY ORIGINAL AUTHOR'S CODE, CURRENTLY ONLY USED FOR TESTING
  *
  * NOTE: If this file won't compile, it's probably a linker issue
- * If using Code::Blocks, add minmm to your linker libraries.
+ * If using Code::Blocks, add winmm to your linker libraries.
  *****************************************************************/
 
 /*
