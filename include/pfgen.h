@@ -4,7 +4,7 @@
  * Header file that defines particle force generators which
  * add forces to one or more particles.
  *
- * Last Revision: Sept. 29, 2014
+ * Last Revision: Sept. 30, 2014
  *
  * TO DO: - Continue tutorial.
  *		  - Depending on future tasks, this may be handy for
