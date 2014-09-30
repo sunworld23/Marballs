@@ -2,6 +2,9 @@
                                     ~ ~ ~ SEPTEMBER TIME SHEET ~ ~ ~ 
 ====================================================================================================
 
+9/30/2014:
+	Kyle (5 minutes total):
+	(5   min) - Debugged Chapter 5 code. Should now compile.
 9/29/2014:
 	Kyle (50 minutes total):
 	(50  min) - Finished Chapter 5 by implementing pfgen.h and pfgen.cpp. 
