@@ -22,7 +22,7 @@ void ParticleForceRegistry::UpdateForces(marb duration) {
 // GRAVITY GENERATOR - OVERLOADED UpdateForce - Applies force of gravity.
 void ParticleGravity::UpdateForce(Particle* particle, marb duration) {
 	if (!particle->HasFiniteMass()) return; // Check to make sure particle doesn't have infinite mass
-	
+
 	particle->AddForce(gravity * particle->GetMass()); // Apply force to particle
 }
 
@@ -30,15 +30,15 @@ void ParticleGravity::UpdateForce(Particle* particle, marb duration) {
 void ParticleDrag::UpdateForce(Particle* particle, marb duration) {
 	Vector3 force;
 	force = particle->GetVelocity();
-	
+
 	// Calculate total drag coefficient
 	marb dragCoeff = force.Magnitude();
 	dragCoeff = k1 * dragCoeff + k2 * dragCoeff * dragCoeff;
-	
+
 	// Calculate and apply final force
 	force.Normalize();
 	force *= -dragCoeff;
-	particle->addForce(force);
+	particle->AddForce(force);
 }
 
 
