@@ -11,8 +11,8 @@
  *          adding magnetism and wind.
  *************************************************************/
 
-#ifndef MARBALLS_PFGEN_H
-#define MARBALLS_PFGEN_H
+#ifndef PFGEN_INCLUDED
+#define PGFEN_INCLUDED
 
 #include "engine_core.h"
 #include "particle.h"
@@ -76,4 +76,4 @@ namespace marballs {
 }
 
 
-#endif // MARBALLS_PFGEN_H
+#endif // PFGEN_INCLUDED
