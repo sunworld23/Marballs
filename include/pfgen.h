@@ -12,7 +12,7 @@
  *************************************************************/
 
 #ifndef PFGEN_INCLUDED
-#define PGFEN_INCLUDED
+#define PFGEN_INCLUDED
 
 #include "engine_core.h"
 #include "particle.h"
