@@ -46,7 +46,7 @@ namespace marballs
         #define marb_exp        expf
         #define marb_pow        powf
         #define marb_sqrt       sqrtf
-        #define marb_abs        fabs
+        #define marb_abs        fabsf
         #define marb_fmod       fmodf
     #else
         #define DOUBLE_PRECISION
