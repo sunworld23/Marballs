@@ -5,39 +5,3 @@
 10/12/2014:
 	Charlie (75 minutes):
 		Finished Chapter 7
-
-9/30/2014:
-	Kyle (5 minutes total):
-	(5   min) - Debugged Chapter 5 code. Should now compile.
-9/29/2014:
-	Kyle (50 minutes total):
-	(50  min) - Finished Chapter 5 by implementing pfgen.h and pfgen.cpp. 
-
-9/28/2014:
-	Kyle (6 hours total):
-	(180 min) - Determining and experimenting with implementation of main.cpp and fireworks.cpp.
-	(160 min) - Adapting author's source code and updating particle.h/particle.cpp to work with the demo.	
-	(20  min) - Miscellaneous maintenance, notation, and reading.
-
-9/24/2014:
-	Group (15 min):
-	(Meeting) Topics discussed:
-		- Having better communication, part of this is because Chris needs to set up the project management tool
-		- Timeline has been set, 4 chapters of implementation must be completed every 2 weeks
-		- Time sheet created, start keeping track of how long tasks take you and total work time
-		- Version history needs to be updated at the end of a day when changes are made
-		- Regular working times need to be set up when tasks become assigned. Possible pair programming in the future.
-
-	Brenton(3 hours total):
-	(5 min)   - Updated particle.h and initialized the integrate function.
-	(55 min)  - Implementation of integrate function in particle.cpp / Learned to use Github application.
-	(120 min) - Debugging / Testing (Tried using completed files from author’s Github for Chapter 4 test scenario).
-		
-	Chris (1 hour 40 min total):
-	(40 min) - Read and started to implement the particle.h header file, did not get to the integrator
-	(5  min) - created the particle.cpp source file, just head comments
-	(5  min) - fixed the engine_core.h, capitalized all Vector3 functions and class name
-	(10 min) - created marballs.h header file, a global include that simply includes all of the headers we create
-	(40 min) - in engine_core.h, changed type real to type marb, added in function to overload * and << operators,
-		   tested functions is engine_core.h and everything seems to be working for now. **Note** formatting on
-		   GitHub seems messed up, but it looks fine in CodeBlocks.
