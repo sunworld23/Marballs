@@ -32,19 +32,21 @@ namespace marballs
         /*********************************
         *     Function Declarations
         *********************************/
-            // Fills given contact structure with the contact needed to keep link
-            // from violating constraint
+            // fillContact - Fills given contact structure with the contact
+            // needed to keep link from violating constraint
             virtual unsigned fillContact(ParticleContact *contact, unsigned limit) const = 0;
 
         protected:
-            // Return length of cable
+            // currentLength - Return length of cable
             marb currentLength() const;
 
 
         private:
-            void resolveVelocity(marbs duration);   // Handles the impulse caculations for this collision
+            // resolveVelocity - Handles the impulse caculations for this collision
+            void resolveVelocity(marbs duration);
 
-            void resolveInterpenetration(marb duration); // Handles interpenetration resolution
+            // resolveInterpenetration - Handles interpenetration resolution
+            void resolveInterpenetration(marb duration);
 
             /**********************************************************************************
             * END OF SETTER AND GETTER FUNCTION (AVOID USING SETTERS IF POSSIBLE)
@@ -55,9 +57,11 @@ namespace marballs
     class ParticleCable: public ParticleLink
     {
         public:
-            marb maxLength;
-            marb restitution;
+            marb maxLength; // Holds max length cable can stretch
+            marb restitution; // Holds Restitution or bounciness of cable
 
+            // fillContact - Fills given contact structure with the contact
+            // needed to keep cable from overextending
             virtual unsigned fillContact(ParticleContact *contact, unsigned limit) const;
 
     };
@@ -69,15 +73,15 @@ namespace marballs
             // Length of rod
             marb length;
 
+            // currentLength - returns the current length of the rod
             marb currentLength() const;
 
-            // Fills given contact structure with the contact needed to keep rod
-            // from extending or compressing
+            // fillContact - Fills given contact structure with the contact
+            // needed to keep rod from extending or compressing
             virtual unsigned fillContact(ParticleContact *contact, unsinged limit) const;
 
 
     };
-
 
 } // marballs namespace end
 

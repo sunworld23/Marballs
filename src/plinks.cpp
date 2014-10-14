@@ -8,11 +8,12 @@
  * TO DO: - Debug
  *************************************************************/
 
-#include <pcontacts.h>
+#include "pcontacts.h"
+
 
 using namespace marballs;
 
-real ParticleLink::currentLength() const
+marb ParticleLink::currentLength() const
 {
     Vector3 relativePos = particle[0]->GetPosition() -
                             particle[1]->GetPosition();
@@ -77,11 +78,6 @@ unsigned ParticleRod::fillContact(ParticleContact *contact, unsigned limit) cons
     return 1;
 }
 
-
-/*****************************
-* GETTER AND SETTER FUNCTIONS
-******************************/
-// NOTE: Supposedly these setters should only be used as a last resort. Use other, less direct methods first.
 
 
 

@@ -1,8 +1,14 @@
 ====================================================================================================
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
+October 14, 2014:
+	- Chris added 2 new files (pworld.h, pworld.cpp)
+	- Fixed some small errors in pcontacts.h and pcontacts.cpp
+	- Changed some comment formatting in pcontacts.h and .cpp
+	- Finished through chapter 8, pick up on chapter 9
+
 October 12, 2014:
-	- Charlie added 4 new files (pcontacts.h, pcontacts.cpp, plinks.h, plinks.cpp
+	- Charlie added 4 new files (pcontacts.h, pcontacts.cpp, plinks.h, plinks.cpp)
 
 Sept. 28, 2014:
 	- Kyle cobbled together the fireworks demo of the particle physics engine.

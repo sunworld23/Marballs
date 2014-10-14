@@ -34,37 +34,69 @@ namespace marballs
 
             Vector3 contactNormal;  // Holds the direction of the contact in world coordinates
 
-            marb penetration;
-
-            ParticleContactResolver(unsigned iterations);
-
-            void SetIterations(unsigned iterations);
-
-            void resolveContacts(ParticleContact *contactArray, unsigned numContacts, marb duration);
+            marb penetration;       // Depth of the penetration between objects
 
         /*********************************
         *     Function Declarations
         *********************************/
         protected:
-            unsigned iterations;
 
-            unsigned iterationsUsed;
+            // resolve - Resolves this contact, for both velocity and interpenetration.
+            void resolve(marb duration);
 
-            void resolve(marb duration); // Resolves this contact, for both velocity and interpenetration
-
-            marb carculateSeparatingVelocity() const;   // Calculates the separating velocity at this contact
+            // calculateSeparatingVelocity - Calculates the separating velocity at this contact
+            marb calculateSeparatingVelocity() const;
 
 
         private:
-            void resolveVelocity(marbs duration);   // Handles the impulse caculations for this collision
+            // resolveVeloctity - Handles the impulse caculations for this collision
+            void resolveVelocity(marbs duration);
 
-            void resolveInterpenetration(marb duration); // Handles interpenetration resolution
+            // resolveInterpenetration - Handles interpenetration resolution
+            void resolveInterpenetration(marb duration);
 
             /**********************************************************************************
             * END OF SETTER AND GETTER FUNCTION (AVOID USING SETTERS IF POSSIBLE)
             ***********************************************************************************/
 
-    }; // Particle Contact class end
+    }; // ParticleContact class end
+
+    class ParticleContactResolver
+    {
+        /*********************************
+        *     Variable Declarations
+        *********************************/
+        protected:
+            unsigned iterations; // Number of iterations allowed
+
+            unsigned iterationsUsed; // Performance tracking, actual number of iterations used
+
+        /*********************************
+        *     Function Declarations
+        *********************************/
+
+        public:
+            // Constructor - Creates a new contact resolver
+            ParticleContactResolver(unsigned iterations);
+
+            // SetIterations - sets the number of iterations allowed
+            void SetIterations(unsigned iterations);
+
+            // resolveContacts - Resolves particle contact for both penetration and velocity
+            void resolveContacts(ParticleContact *contactArray, unsigned numContacts, marb duration);
+
+    }; // ParticleContactResolver class end
+
+    class ParticleContactGenerator
+    {
+        public:
+            // addContact - fills the contact structure with the generated contact.
+            // The contact pointer should always point to the first available contact.
+            // Limit is the maximum number of contacts that can be written to.
+            // Returns the number of contacts that were written
+            virtual unsigned addContact(ParticleContact *contact, unsigned limit) const = 0;
+
+    }; // ParticleContactGenerator class end
 } // marballs namespace end
 
  #endif // PCONTACTS_INCLUDED

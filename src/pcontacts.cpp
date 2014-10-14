@@ -8,19 +8,21 @@
  * TO DO: - Debug
  *************************************************************/
 
-#include <pcontacts.h>
+#include "pcontacts.h"
 
-using namespace marballs;
 
 void ParticleContact::resolve(marb duration)
 {
     resolveVelocity(duration);
 }
 
-real ParticleContact::calculateSeparatingVelocity() const
+marb ParticleContact::calculateSeparatingVelocity() const
 {
     Vector3 relativeVelocity = particle[0]->GetVelocity();
-    if(particle[1]) relativeVelocity -= particle[1]->GetVelocity();
+
+    if(particle[1])
+        relativeVelocity -= particle[1]->GetVelocity();
+
     return relativeVelocity * contactNormal;
 }
 
@@ -58,7 +60,7 @@ void ParticleContact::resolveVelocity(marb duration)
 
     // Apply the change in velocity to each object in proportion to its inverse mass
     // Lower inverse mass gets less change in velocity
-    real totalInverseMass = particle[0]->GetInverseMass();
+    marb totalInverseMass = particle[0]->GetInverseMass();
 
     if(particle[1]) totalInverseMass += particle[1]->GetInverseMass();
 
@@ -81,8 +83,6 @@ void ParticleContact::resolveVelocity(marb duration)
         particle[1]->setVelocity(particle[1]->GetVelocity() +
                                  impulsePerIMass * -particle[1]->GetInverseMass());
     }
-
-
 }
 
 void ParticleContact::resolve(marb duration)
@@ -115,36 +115,28 @@ void ParticleContact::resolveInterpenetration(marb duration)
                                  movePerIMass * particle[1]->GetInverseMass());
 }
 
-void ParticleContact::resolveContacts(ParticleContact *contactArray,
+void ParticleContactResolver::resolveContacts(ParticleContact *contactArray,
                                       unsigned numContacts,
                                       marb duration)
 {
-  iterationsUsed = 0;
-  while(iterationsUsed < iterations)
-  {
-      // Find contact with largest closing velocity
-      marb max = 0;
-      unsigned maxIndex = numContacts;
-      for(unsigned i = 0; i < numContacts; i++)
-      {
-          marb sepVel = contactArray[i].calculateSeparatingVelocity();
-          if(sepVel < max)
-          {
-              max = sepVel;
-              maxIndex = i;
-          }
+    iterationsUsed = 0;
+    while(iterationsUsed < iterations)
+    {
+        // Find contact with largest closing velocity
+        marb max = 0;
+        unsigned maxIndex = numContacts;
+        for(unsigned i = 0; i < numContacts; i++)
+        {
+            marb sepVel = contactArray[i].calculateSeparatingVelocity();
+            if(sepVel < max)
+            {
+                  max = sepVel;
+                  maxIndex = i;
+            }
 
-          // Resolve contact
-          contactArray[maxIndex].resolve(duration);
-          iterationsUsed++;
-      }
-  }
+            // Resolve contact
+            contactArray[maxIndex].resolve(duration);
+            iterationsUsed++;
+        }
+    }
 }
-
-/*****************************
-* GETTER AND SETTER FUNCTIONS
-******************************/
-// NOTE: Supposedly these setters should only be used as a last resort. Use other, less direct methods first.
-
-
-
