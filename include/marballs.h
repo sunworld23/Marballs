@@ -6,7 +6,7 @@
 * Header file that groups together all of the other header
 * files included in physics engine.
 *
-* Last Revision: Sept. 30, 2014
+* Last Revision: October 14, 2014
 *
 * TO DO: - Keep adding in includes as we create more headers
 *************************************************************/
@@ -23,6 +23,9 @@
 #include "particle.h"
 #include "decimal_precision.h"
 #include "pfgen.h"
+#include "pcontacts.h"
+#include "pworld.h"
+#include "plinks.h"
 
 #include "random.h" // For testing.
 
