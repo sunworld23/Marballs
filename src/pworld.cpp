@@ -49,13 +49,13 @@ unsigned ParticleWorld::generateContacts()
     return maxContacts - limit;
 }
 
-void ParticleWorld::integrate(marb duration)
+void ParticleWorld::Integrate(marb duration)
 {
     ParticleRegistration *reg = firstParticle;
     while (reg)
     {
         // Remove all forces from the accumulator
-        reg->particle->intgrate(duration);
+        reg->particle->Integrate(duration);
 
         // Get the next registration
         reg = reg->next;
@@ -74,7 +74,7 @@ void ParticleWorld::runPhysics(marb duration)
     unsigned usedContacts = generateContacts();
 
     // Process Contacts
-    if (calculateIterations) //not sure where this variable comes from yet
+    if (calculateIterations)
         resolver.SetIterations(usedContacts * 2);
     resolver.resolveContacts(contacts, usedContacts, duration);
 

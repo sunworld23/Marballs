@@ -43,7 +43,7 @@ namespace marballs
 
         private:
             // resolveVelocity - Handles the impulse caculations for this collision
-            void resolveVelocity(marbs duration);
+            void resolveVelocity(marb duration);
 
             // resolveInterpenetration - Handles interpenetration resolution
             void resolveInterpenetration(marb duration);
@@ -78,7 +78,7 @@ namespace marballs
 
             // fillContact - Fills given contact structure with the contact
             // needed to keep rod from extending or compressing
-            virtual unsigned fillContact(ParticleContact *contact, unsinged limit) const;
+            virtual unsigned fillContact(ParticleContact *contact, unsigned limit) const;
 
 
     };

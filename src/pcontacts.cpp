@@ -74,13 +74,13 @@ void ParticleContact::resolveVelocity(marb duration)
     Vector3 impulsePerIMass = contactNormal * impulse;
 
     // Apply impulse in direction of the contact, proportional to the inverse mass
-    particle[0]->setVelocity(particle[0]->GetVelocity() +
+    particle[0]->SetVelocity(particle[0]->GetVelocity() +
                              impulsePerIMass * particle[0]->GetInverseMass());
 
     if(particle[1])
     {
         // Particle 1 goes in the opposite direction
-        particle[1]->setVelocity(particle[1]->GetVelocity() +
+        particle[1]->SetVelocity(particle[1]->GetVelocity() +
                                  impulsePerIMass * -particle[1]->GetInverseMass());
     }
 }

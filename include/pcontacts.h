@@ -50,7 +50,7 @@ namespace marballs
 
         private:
             // resolveVeloctity - Handles the impulse caculations for this collision
-            void resolveVelocity(marbs duration);
+            void resolveVelocity(marb duration);
 
             // resolveInterpenetration - Handles interpenetration resolution
             void resolveInterpenetration(marb duration);

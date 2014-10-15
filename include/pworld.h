@@ -22,6 +22,8 @@ namespace marballs
         *     Variable Declarations
         *********************************/
 
+        bool calculateIterations; // Determines if iterations need to be counted, then multiply by 2 * usedContacts
+
         struct ParticleRegistration // Holds a linked list of all particles created.
         {
             Particle *particle; // The values held by the particle at this position.
@@ -65,8 +67,8 @@ namespace marballs
             // to return the number of generated contacts.
             unsigned generateContacts();
 
-            // integrate - moves all particles forward by a given duration
-            void integrate(marb duration);
+            // Integrate - moves all particles forward by a given duration
+            void Integrate(marb duration);
 
             // runPhysics - Processes all physics in the particle world
             void runPhysics(marb duration);
