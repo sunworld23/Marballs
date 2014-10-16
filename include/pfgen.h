@@ -4,7 +4,7 @@
  * Header file that defines particle force generators which
  * add forces to one or more particles.
  *
- * Last Revision: Sept. 30, 2014
+ * Last Revision: Oct. 15, 2014
  *
  * TO DO: - Continue tutorial.
  *		  - Depending on future tasks, this may be handy for
@@ -73,93 +73,93 @@ namespace marballs {
 			virtual void UpdateForce(Particle* particle, marb duration);
 
 	};
-    
+
     // CLASS ParticleSpring - A force generator that applies a spring force.
     class ParticleSpring : public ParticleForceGenerator {
         Particle *other; //Holds the particle at the other end of the spring.
         marb springConstant; //Holds the spring constant.
         marb restLength; //Holds the resting length of the spring.
-        
+
     public:
         // Constructor - Creates a spring with given properties.
         ParticleSpring(Particle *other, marb springConstant, marb restLength);
-        
+
         // OVERLOADED UpdateForce - Applies spring force to given particle.
         virtual void UpdateForce(Particle *particle, marb duration);
     };
-    
+
     // CLASS ParticleAnchoredSpring - A force generator that applies a spring force
     // where one end of the spring is attached to a fixed point.
     class ParticleAnchoredSpring : public ParticleForceGenerator{
         //The location of attached end of the spring.
         Vector3 *anchor;
-        
+
         //Holds spring constant.
         marb springConstant;
-        
+
         //Holds the rest length of the spring.
         marb restLength;
-        
+
     public:
         // Constructor - creates an anchored spring with the given parameters.
         ParticleAnchoredSpring(Vector3 *anchor, marb springConstant, marb restLength);
-        
+
         // OVERLOADED UpdateForce - Applies spring force to given particle.
         virtual void UpdateForce(Particle *partical, marb duration);
     };
-    
+
     // CLASS Particle Bungee - Force generator that only applies spring force when extended.
     class ParticleBungee : public ParticleForceGenerator
     {
         // The particle at the other end of the spring.
         Particle *other;
-        
+
         // Holds the sprint constant.
         marb springConstant;
-        
+
         // Holds the length of the bungee at the point it begins to generator a force.
         marb restLength;
-        
+
     public:
-        
+
         // Constructor - creates a bungee with the given parameters.
         ParticleBungee(Particle *other, marb springConstant, marb restLength);
-        
+
         // Applies the spring force to the given particle.
         virtual void UpdateForce(Particle *particle, marb duration);
     };
-    
+
     // CLASS ParticleBuoyancy - A force generator that applies a buoyancy force for a plane of liquid parrallel to XZ plane.
     class ParticleBuoyancy : public ParticleForceGenerator
     {
         marb maxDepth;// The maximum submersion depth of the object before it generates its maximum boyancy force.
-        
+
         marb volume;// Volume of the object
-        
+
         marb waterHeight;// The height of the water plane above y=0. The plane will be parrallel to the XZ plane.
 
         marb liquidDensity;// The density of the liquid. Pure water has a density of 1000kg per cubic meter.
-        
+
     public:
-        
+
         // Constructor - Creates a new buoyancy force with the given parameters.
         ParticleBuoyancy(marb maxDepth, marb volume, marb waterHeight, marb liquidDensity = 1000.0f);
-        
+
         // Applies the buoyancy force to the given particle.
         virtual void UpdateForce(Particle *particle, marb duration);
     };
-    
+
     // CLASS ParticleFakeSpring - A force generator that fakes a stiff spring force, and where one end is attached to a fixed point.
     class ParticleFakeSpring : public ParticleForceGenerator
     {
         Vector3 *anchor;// The location of the anchored end of the spring.
         marb springConstant;// Holds the spring constant
         marb damping;// Holds the damping on the oscillation of the spring.
-        
+
     public:
         //Creates a new spring with the given parameters.
         ParticleFakeSpring(Vector3 *anchor, marb springConstant, marb damping);
-        
+
         // Applies the spring force to the given particle.
         virtual void UpdateForce(Particle *particle, marb duration);
     };

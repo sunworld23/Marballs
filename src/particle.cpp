@@ -19,13 +19,13 @@ void Particle::Integrate(marb duration)
 {
     assert(duration > 0.0);
 
-    position.addScaledVector(velocity, duration); // Updates linear position.
+    position.AddScaledVector(velocity, duration); // Updates linear position.
 
     // Work out the acceleration from the force.
-    Vector3 resultingAcc = acceleration; 
-    resultingAcc.addScaledVector(forceAccum, inverseMass);
+    Vector3 resultingAcc = acceleration;
+    resultingAcc.AddScaledVector(forceAccum, inverseMass);
 
-    velocity.addScaledVector(resultingAcc, duration); // Update linear velocity based on the calculated acceleration.
+    velocity.AddScaledVector(resultingAcc, duration); // Update linear velocity based on the calculated acceleration.
 
     velocity *= marb_pow(damping, duration); // Inflicts drag on the object by applying damping
 

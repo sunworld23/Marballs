@@ -3,33 +3,33 @@
  * -------------
  * Source file that will implement our particle contacts header file.
  *
- * Last Revision: October 12, 2014
+ * Last Revision: October 15, 2014
  *
  * TO DO: - Debug
  *************************************************************/
 
 #include "pcontacts.h"
 
+using namespace marballs;
 
-void ParticleContact::resolve(marb duration)
-{
-    resolveVelocity(duration);
+// Resolve - Resolves contacts.
+void ParticleContact::Resolve(marb duration) {
+    ResolveVelocity(duration);
+    ResolveInterpenetration(duration);
 }
 
-marb ParticleContact::calculateSeparatingVelocity() const
-{
+marb ParticleContact::CalculateSeparatingVelocity() const {
     Vector3 relativeVelocity = particle[0]->GetVelocity();
 
     if(particle[1])
         relativeVelocity -= particle[1]->GetVelocity();
 
-    return relativeVelocity * contactNormal;
+    return relativeVelocity.DotProduct(contactNormal); // POSSIBLE WRONG SUBSTITUTION
 }
 
-void ParticleContact::resolveVelocity(marb duration)
-{
+void ParticleContact::ResolveVelocity(marb duration) {
     //Find velocity in the direction of contact
-    marb separatingVelocity = calculateSeparatingVelocity();
+    marb separatingVelocity = CalculateSeparatingVelocity();
 
     // Check if it needs to be resolved
     if (separatingVelocity > 0)
@@ -46,8 +46,7 @@ void ParticleContact::resolveVelocity(marb duration)
 
     if(particle[1]) accCausedVelocity -= particle[0]->GetAcceleration();
 
-    marb accCausedSepVelocity = accCausedVelocity *
-                                contactNormal * duration;
+    marb accCausedSepVelocity = accCausedVelocity.DotProduct(contactNormal) * duration; // POSSIBLE WRONG SUBSTITUTION
 
     if(accCausedSepVelocity < 0)
     {
@@ -85,14 +84,7 @@ void ParticleContact::resolveVelocity(marb duration)
     }
 }
 
-void ParticleContact::resolve(marb duration)
-{
-    resolveVelocity(duration);
-    resolveInterpenetration(duration);
-}
-
-void ParticleContact::resolveInterpenetration(marb duration)
-{
+void ParticleContact::ResolveInterpenetration(marb duration) {
     // No penetration, skip
     if(penetration <= 0) return;
 
@@ -115,10 +107,18 @@ void ParticleContact::resolveInterpenetration(marb duration)
                                  movePerIMass * particle[1]->GetInverseMass());
 }
 
-void ParticleContactResolver::resolveContacts(ParticleContact *contactArray,
-                                      unsigned numContacts,
-                                      marb duration)
-{
+// Constructor
+ParticleContactResolver::ParticleContactResolver(unsigned iterations)
+:
+iterations(iterations) {}
+
+// SetIterations - Sets the number of iterations.
+void ParticleContactResolver::SetIterations(unsigned iterations) {
+    ParticleContactResolver::iterations = iterations;
+}
+
+// ResolveContacts - Resolves contacts.
+void ParticleContactResolver::ResolveContacts(ParticleContact *contactArray, unsigned numContacts, marb duration) {
     iterationsUsed = 0;
     while(iterationsUsed < iterations)
     {
@@ -127,7 +127,7 @@ void ParticleContactResolver::resolveContacts(ParticleContact *contactArray,
         unsigned maxIndex = numContacts;
         for(unsigned i = 0; i < numContacts; i++)
         {
-            marb sepVel = contactArray[i].calculateSeparatingVelocity();
+            marb sepVel = contactArray[i].CalculateSeparatingVelocity();
             if(sepVel < max)
             {
                   max = sepVel;
@@ -135,8 +135,10 @@ void ParticleContactResolver::resolveContacts(ParticleContact *contactArray,
             }
 
             // Resolve contact
-            contactArray[maxIndex].resolve(duration);
+            contactArray[maxIndex].Resolve(duration);
             iterationsUsed++;
         }
     }
 }
+
+
