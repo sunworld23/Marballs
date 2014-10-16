@@ -16,7 +16,7 @@
 #include <cstring>
 #include <gl/glut.h>
 #include "app.h"
-//#include "timing.h"
+#include "timing.h"
 
 void Application::initGraphics()
 {
@@ -129,4 +129,65 @@ void Application::renderText(float x, float y, const char *text, void *font)
     glEnable(GL_DEPTH_TEST);
 }
 
+MassAggregateApplication::MassAggregateApplication(unsigned int particleCount) : world(particleCount*10) {
+    //world = new ParticleWorld(particleCount * 10u, 0u); // ALTERNATIVE FOR COMPILING
+
+    particleArray = new marballs::Particle[particleCount];
+    for (unsigned i = 0; i < particleCount; i++)
+    {
+        world.GetParticles().push_back(particleArray + i);
+    }
+
+    groundContactGenerator.Init(&world.GetParticles());
+    world.GetContactGenerators().push_back(&groundContactGenerator);
+}
+
+MassAggregateApplication::~MassAggregateApplication()
+{
+    delete[] particleArray;
+}
+
+void MassAggregateApplication::initGraphics()
+{
+    // Call the superclass
+    Application::initGraphics();
+}
+
+void MassAggregateApplication::display()
+{
+    // Clear the view port and set the camera direction
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    gluLookAt(0.0, 3.5, 8.0,  0.0, 3.5, 0.0,  0.0, 1.0, 0.0);
+
+    glColor3f(0,0,0);
+
+    marballs::ParticleWorld::Particles &particles = world.GetParticles();
+    for (marballs::ParticleWorld::Particles::iterator p = particles.begin();
+        p != particles.end();
+        p++)
+    {
+        marballs::Particle *particle = *p;
+        const marballs::Vector3 &pos = particle->GetPosition();
+        glPushMatrix();
+        glTranslatef(pos.x, pos.y, pos.z);
+        glutSolidSphere(0.1f, 20, 10);
+        glPopMatrix();
+    }
+}
+
+void MassAggregateApplication::update()
+{
+    // Clear accumulators
+    world.StartFrame();
+
+    // Find the duration of the last frame in seconds
+    float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
+    if (duration <= 0.0f) return;
+
+    // Run the simulation
+    world.RunPhysics(duration);
+
+    Application::update();
+}
 

@@ -19,8 +19,8 @@
  *
  * This file contains the definitions for a random number generator.
  */
-#ifndef MARBALLS_RANDOM_H
-#define MARBALLS_RANDOM_H
+#ifndef RANDOM_INCLUDED
+#define RANDOM_INCLUDED
 
 #include "engine_core.h"
 
@@ -135,4 +135,4 @@ namespace marballs {
 
 } // namespace marballs
 
-#endif // MARBALLS_BODY_H
+#endif // RANDOM_INCLUDED

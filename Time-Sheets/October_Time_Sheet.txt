@@ -5,6 +5,10 @@
 10/15/2014:
 	Chris, Kyle, and Brenton (50 min):
 	(50 minutes) -  Found and fixed a few careless mistakes (capitalization and spelling)
+	
+	Kyle (240 min):
+	(230 min)    - Substantial amounts of debugging to allow the demo code to compile.
+	( 10 min)    - Taking note of changes.
 
 10/14/2014:
 	Chris (90 minutes):

@@ -16,7 +16,7 @@
 #ifndef PARTICLE_INCLUDED
 #define PARTICLE_INCLUDED
 
-#include "marballs.h"
+#include "engine_core.h"
 
 namespace marballs
 {

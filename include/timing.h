@@ -19,8 +19,8 @@
  *
  * Holds the timing system for the physics demos.
  */
-#ifndef MARBALLS_DEMO_TIMING_H
-#define MARBALLS_DEMO_TIMING_H
+#ifndef TIMING_INCLUDED
+#define TIMING_INCLUDED
 
 /**
  * Represents all the information that the demo might need about the
@@ -112,4 +112,4 @@ private:
 };
 
 
-#endif // MARBALLS_DEMO_TIMING_H
+#endif // TIMING_INCLUDED

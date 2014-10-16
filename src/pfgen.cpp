@@ -69,7 +69,7 @@ void ParticleAnchoredSpring::UpdateForce(Particle* particle, marb duration){
     force -= *anchor;
 
     // Calculate the magnitude of the force.
-    marb magnitude = force.magnitude();
+    marb magnitude = force.Magnitude();
     magnitude = marb_abs(magnitude - restLength);
     magnitude *= springConstant;
 
@@ -134,7 +134,7 @@ void ParticleFakeSpring::UpdateForce(Particle* particle, marb duration)
     // Calculate the relative position of the particle to the anchor.
     Vector3 position;
     //particle->GetPosition(&position); //This function seems to do the same as setPosition
-    particle->SetPosition(position) // This is in the place of GetPosition(&position) which is commented out, keep an eye
+    particle->SetPosition(position); // This is in the place of GetPosition(&position) which is commented out, keep an eye
     position -= *anchor;
 
     // Calculate the constants and check whether they are in bounds.

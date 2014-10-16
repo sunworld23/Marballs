@@ -4,7 +4,7 @@
  * Header file for the physics engine core. Defines
  * vectors and their functions.
  *
- * Last Revision: Sept. 28, 2014
+ * Last Revision: Oct. 15, 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *		  - This bullet included for to do list formatting.
@@ -36,6 +36,9 @@ namespace marballs
             marb z; // Holds the z-access value
 
             const static Vector3 GRAVITY; // Holds constant gravity value.
+            // ... other constants
+            const static Vector3 UP; // Universal up direction.
+            // ... other constants
 
         private:
 
@@ -117,56 +120,56 @@ namespace marballs
 				return Vector3(x-v.x, y-v.y, z-v.z);
 			}
 
-			// addScaledVector - Adds a given vector to this, scaled by a scalar.
-			void addScaledVector(const Vector3& vector, marb scalar) {
+			// AddScaledVector - Adds a given vector to this, scaled by a scalar.
+			void AddScaledVector(const Vector3& vector, marb scalar) {
 				x += vector.x * scalar;
 				y += vector.y * scalar;
 				z += vector.z * scalar;
 			}
 
-			// componentProduct - Straight multiplies the components of this vector and the given one and returns the result.
-			Vector3 componentProduct(const Vector3 &vector) const {
+			// ComponentProduct - Straight multiplies the components of this vector and the given one and returns the result.
+			Vector3 ComponentProduct(const Vector3 &vector) const {
 				return Vector3(x * vector.x, y * vector.y, z * vector.z);
 			}
 
-			// componentProductUpdate - Performs a component product and sets this vector to the result.
-			void componentProductUpdate(const Vector3 &vector) {
+			// ComponentProductUpdate - Performs a component product and sets this vector to the result.
+			void ComponentProductUpdate(const Vector3 &vector) {
 				x *= vector.x;
 				y *= vector.y;
 				z *= vector.z;
 			}
 
-			// dotProduct - Calculates and returns the dot product of this vector and the given one.
+			// DotProduct - Calculates and returns the dot product of this vector and the given one.
 			// Used for determining if vectors are perpendicular, and what the angle is between them.
-			marb dotProduct(const Vector3 &vector) const {
+			marb DotProduct(const Vector3 &vector) const {
 				return x*vector.x + y*vector.y + z*vector.z; // Returns a number, not a vector!
 			}
 
-			// scalarProduct - See: dotProduct
+			// ScalarProduct - See: DotProduct
 			// NOTE: Leaving it in as a deprecated function with a suggestion to use the other.
 			// 		 This way, people following the guide may use this without confusion, but are
 			//		 pointed in the right direction.
-			marb scalarProduct(const Vector3 &vector) const {
+			marb ScalarProduct(const Vector3 &vector) const {
 				std::cout << "[DEBUG] (engine_core.h) Use dotProduct() instead!" << std::endl;
-				return dotProduct(vector);
+				return DotProduct(vector);
 			}
 
-			// crossProduct - Calculates and returns the cross product of this vector and the given one.
+			// CrossProduct - Calculates and returns the cross product of this vector and the given one.
 			// Used for calculating normal vectors, and determining if vectors are parallel.
 			// NOTE: With vectors a and b, a x b = -b x a
-			Vector3 crossProduct(const Vector3 &vector) const {
+			Vector3 CrossProduct(const Vector3 &vector) const {
 				return Vector3(y * vector.z - z * vector.y,
 							   z * vector.x - x * vector.z,
 							   x * vector.y - y * vector.x);
 			}
 
-			// vectorProduct - See: crossProduct
+			// VectorProduct - See: CrossProduct
 			// NOTE: Leaving it in as a deprecated function with a suggestion to use the other.
 			// 		 This way, people following the guide may use this without confusion, but are
 			//		 pointed in the right direction.
-			Vector3 vectorProduct(const Vector3 &vector) const {
+			Vector3 VectorProduct(const Vector3 &vector) const {
 				std::cout << "[DEBUG] (engine_core.h) Use crossProduct() instead!" << std::endl;
-				return crossProduct(vector);
+				return CrossProduct(vector);
 			}
 
 			// overload << operator - To help with testing and getting values of Vector3

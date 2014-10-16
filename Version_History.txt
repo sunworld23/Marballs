@@ -1,6 +1,11 @@
 ====================================================================================================
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
+
+October 15, 2014:
+	- Kyle debugged several dozen or so errors in almost all files allowing the bridge demo to compile.
+	- Bridge demo runs but behavior doesn't match description or screenshots in tutorial?
+
 October 14, 2014:
 	- Chris added 2 new files (pworld.h, pworld.cpp)
 	- Fixed some small errors in pcontacts.h and pcontacts.cpp
