@@ -2,6 +2,9 @@
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
 
+October 20, 2014:
+	- Kyle got bridge demo to work. [Will list additional changes after group meeting]
+
 October 15, 2014:
 	- Kyle debugged several dozen or so errors in almost all files allowing the bridge demo to compile.
 	- Bridge demo runs but behavior doesn't match description or screenshots in tutorial?

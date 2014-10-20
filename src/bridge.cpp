@@ -1,3 +1,7 @@
+/*****************************************************************
+ * MOSTLY ORIGINAL AUTHOR'S CODE, CURRENTLY ONLY USED FOR TESTING
+ *****************************************************************/
+
 /*
  * The bridge demo.
  *
@@ -11,7 +15,7 @@
  */
 
 #include "marballs.h"
-#include "gl/glut.h"
+#include "ogl_headers.h"
 #include "app.h"
 #include "timing.h"
 

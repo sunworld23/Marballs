@@ -5,10 +5,11 @@
  * a world for the particles to be kept track of. Particles
  * are all held within a linked list.
  *
- * Last Revision: Oct. 15 2014
+ * Last Revision: Oct. 18 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *************************************************************/
+
 #ifndef PWORLD_INCLUDED
 #define PWORLD_INCLUDED
 

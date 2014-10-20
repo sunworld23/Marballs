@@ -3,7 +3,7 @@
  * -------------
  * Header file that connects two particles together
  *
- * Last Revision: October 15, 2014
+ * Last Revision: October 20, 2014
  *
  * TO DO: - Debug
  *************************************************************/
@@ -83,7 +83,7 @@ namespace marballs {
         marb CurrentLength() const; // Returns current length of link.
 
     public:
-        /**
+        /** AUTHOR'S NOTE
         * Generates the contacts to keep this link from being
         * violated. This class can only ever generate a single
         * contact, so the pointer can be a pointer to a single
@@ -119,6 +119,6 @@ namespace marballs {
         virtual unsigned AddContact(ParticleContact *contact, unsigned limit) const;
     };
 
-} // marballs namespace end
+} // End of marballs namespace.
 
  #endif // PLINKS_INCLUDED
