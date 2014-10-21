@@ -4,7 +4,7 @@
  * Source file that will implement our particle header file.
  * Particle class is not to be confused with particle physics.
  *
- * Last Revision: Sept. 29, 2014
+ * Last Revision: Oct. 20, 2014
  *
  * TO DO: - Polish formatting, this file's close to done.
  *************************************************************/
@@ -106,4 +106,3 @@ void Particle::SetAcceleration(const marb x, const marb y, const marb z) {
 //void Particle::GetAcceleration(Vector3 *acceleration) const { }
 
 Vector3 Particle::GetAcceleration() const { return acceleration; }
-

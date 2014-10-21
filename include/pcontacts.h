@@ -29,11 +29,12 @@ namespace marballs {
         *     Variable Declarations
         *********************************/
         public:
-            Particle* particle[2];  // Holds the particles that are involved in the contact
-                                    // Contact with scenery is makes the second particle NULL
-            marb restitution;       // Holds the normal restitution coefficient at the contact
-            Vector3 contactNormal;  // Holds the direction of the contact in world coordinates
-            marb penetration;       // Depth of the penetration between objects
+            Particle* particle[2];       // Holds the particles that are involved in the contact
+                                         // Contact with scenery is makes the second particle NULL
+            marb restitution;            // Holds the normal restitution coefficient at the contact
+            Vector3 contactNormal;       // Holds the direction of the contact in world coordinates
+            marb penetration;            // Depth of the penetration between objects
+            Vector3 particleMovement[2]; // Holds amount each particle moved during interpenetration resolving
 
         /*********************************
         *     Function Declarations

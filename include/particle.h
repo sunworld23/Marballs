@@ -76,6 +76,7 @@ namespace marballs
             bool HasFiniteMass() const;
             void ClearAccumulator();
             void AddForce(const Vector3 &force);
+
     }; // Particle class end
 } // marballs namespace end
 

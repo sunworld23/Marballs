@@ -3,7 +3,7 @@
  * ---------------
  * Source file to implement pworld.h
  *
- * Last Revision: Oct. 13 2014
+ * Last Revision: Oct. 20 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *************************************************************/
@@ -13,87 +13,63 @@
 
 using namespace marballs;
 
-// Constructor
-ParticleWorld::ParticleWorld(unsigned maxContacts, unsigned iterations)
-:
-resolver(iterations),
-maxContacts(maxContacts)
-{
+// Explicit Constructor
+ParticleWorld::ParticleWorld(unsigned maxContacts, unsigned iterations) : resolver(iterations), maxContacts(maxContacts) {
     contacts = new ParticleContact[maxContacts];
     calculateIterations = (iterations == 0);
 
 }
 
 // Destructor
-ParticleWorld::~ParticleWorld()
-{
+ParticleWorld::~ParticleWorld() {
     delete[] contacts;
 }
 
 // StartFrame - Clears force accumulators for particles so new forces can be added.
-void ParticleWorld::StartFrame()
-{
-    ParticleRegistration *reg = firstParticle;
-
-    while (reg)
-    {
-        // Removes forces from force accumulator
-        reg->particle->ClearAccumulator();
-
-        // Get next particle in list
-        reg = reg->next;
+void ParticleWorld::StartFrame() {
+    for (Particles::iterator p = particles.begin(); p != particles.end(); p++) {
+        // Remove all forces from the accumulator
+        (*p)->ClearAccumulator();
     }
 }
 
 // GenerateContacts - Generates contacts everywhere there is a collision.
-unsigned ParticleWorld::GenerateContacts()
-{
+unsigned ParticleWorld::GenerateContacts() {
     unsigned limit = maxContacts;
     ParticleContact *nextContact = contacts;
 
-    ContactGenRegistration *reg = firstContactGen;
-    while (reg)
-    {
-        unsigned used = reg->gen->AddContact(nextContact, limit);
+    for (ContactGenerators::iterator g = contactGenerators.begin(); g != contactGenerators.end(); g++) {
+        unsigned used =(*g)->AddContact(nextContact, limit);
         limit -= used;
         nextContact += used;
 
-        //Run out of contacts meaning we are missing contacts
-        if (limit <= 0)
-            break;
-
-        reg = reg->next;
+        // Running out of contacts means there are missing contacts.
+        if (limit <= 0) break;
     }
 
-    // Return the number of contacts used
+    // Return the number of contacts used.
     return maxContacts - limit;
 }
 
 // Integrate - Integrates particles for the specified duration.
-void ParticleWorld::Integrate(marb duration)
-{
-    ParticleRegistration *reg = firstParticle;
-    while (reg)
-    {
+void ParticleWorld::Integrate(marb duration) {
+    for (Particles::iterator p = particles.begin(); p != particles.end(); p++) {
         // Remove all forces from the accumulator
-        reg->particle->Integrate(duration);
-
-        // Get the next registration
-        reg = reg->next;
+        (*p)->Integrate(duration);
     }
 }
 
 // RunPhysics - Runs contact physics for the specified duration.
 void ParticleWorld::RunPhysics(marb duration) {
-    registry.UpdateForces(duration); // Apply the force generators
-    Integrate(duration); // Integrate objects.
+    registry.UpdateForces(duration); // First apply the force generators
+    Integrate(duration); // Then integrate the objects
+    unsigned usedContacts = GenerateContacts(); // Generate contacts
 
-    unsigned usedContacts = GenerateContacts(); // Generate contacts.
-
-    if (calculateIterations) // Progress contacts.
-        resolver.SetIterations(usedContacts * 2);
-    resolver.ResolveContacts(contacts, usedContacts, duration);
-
+    // And process them
+    if (usedContacts) {
+        if (calculateIterations) resolver.SetIterations(usedContacts * 2);
+        resolver.ResolveContacts(contacts, usedContacts, duration);
+    }
 }
 
 // GETTER FUNCTIONS
@@ -109,13 +85,10 @@ void GroundContacts::Init(marballs::ParticleWorld::Particles *particles) {
 // AddContact - Adds an additional contact.
 unsigned GroundContacts::AddContact(marballs::ParticleContact *contact, unsigned limit) const {
     unsigned count = 0;
-    for (marballs::ParticleWorld::Particles::iterator p = particles->begin();
-        p != particles->end();
-        p++)
-    {
+    for (marballs::ParticleWorld::Particles::iterator p = particles->begin(); p != particles->end(); p++) {
         marballs::marb y = (*p)->GetPosition().y;
-        if (y < 0.0f)
-        {
+
+        if (y < 0.0f) {
             contact->contactNormal = marballs::Vector3::UP;
             contact->particle[0] = *p;
             contact->particle[1] = NULL;
@@ -129,4 +102,3 @@ unsigned GroundContacts::AddContact(marballs::ParticleContact *contact, unsigned
     }
     return count;
 }
-
