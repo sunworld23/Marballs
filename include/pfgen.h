@@ -4,7 +4,7 @@
  * Header file that defines particle force generators which
  * add forces to one or more particles.
  *
- * Last Revision: Oct. 15, 2014
+ * Last Revision: Oct. 25, 2014
  *
  * TO DO: - Continue tutorial.
  *		  - Depending on future tasks, this may be handy for
@@ -163,6 +163,48 @@ namespace marballs {
         // Applies the spring force to the given particle.
         virtual void UpdateForce(Particle *particle, marb duration);
     };
+	
+	//CLASS Gravity - A force generator used for gravity with rigid bodies
+	class Gravity : public ForceGenerator
+	{
+		
+		//Acceleration due to gravity
+		Vector3 gravity;
+		
+		public:
+			//Create generator with specified acceleration
+			Gravity(const Vector3 &gravity);
+			
+			//Applies gravity to specified rigid body
+			virtual void updateForce(RigidBody *body, marb duration);
+	};
+	
+	//CLASS Spring - A force generator used to apply Spring force
+	class Spring : public ForceGenerator
+	{
+		//Point of connection of spring
+		Vector3 connectionPoint;
+		
+		//Point of connection between spring and the other object
+		Vector3 otherConnectionPoint;
+		
+		//Particle at the other end of the spring
+		RigidBody *pther;
+		
+		//Spring constant
+		marb sprintConstant;
+		
+		//Resting length of the spring
+		marb restLength;
+		
+		public:
+			//Creates a new spring with specified values
+			Spring(const Vector3 &localConnectionPt, RigidBody *other,
+					const Vector3 &otherConnectionPt, marb springConstant, marb springLength);
+					
+			//Applies spring force to specified particle
+			virtual void updateForce(RigidBody *body, marb duration);
+	};
 }
 
 
