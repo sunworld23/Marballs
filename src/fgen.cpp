@@ -1,17 +1,17 @@
-#include "marballs.h"
+#include "fgen.h"
 
 using namespace marballs;
 
-void ForceRegistry::updateForces(marbs duration)
+void ForceRegistry::UpdateForces(marb duration)
 {
     Registry::iterator i = registrations.begin();
     for (; i != registrations.end(); i++)
     {
-        i->fg->updateForce(i->body, duration);
+        i->fg->UpdateForce(i->body, duration);
     }
 }
 
-void ForceRegistry::add(RigidBody *body, ForceGenerator *fg)
+void ForceRegistry::Add(RigidBody *body, ForceGenerator *fg)
 {
     ForceRegistry::ForceRegistration registration;
     registration.body = body;
@@ -19,8 +19,8 @@ void ForceRegistry::add(RigidBody *body, ForceGenerator *fg)
     registrations.push_back(registration);
 }
 
-Buoyancy::Buoyancy(const Vector3 &cOfB, marbs maxDepth, marbs volume,
-                   marbs waterHeight, marbs liquidDensity /* = 1000.0f */)
+Buoyancy::Buoyancy(const Vector3 &cOfB, marb maxDepth, marb volume,
+                   marb waterHeight, marb liquidDensity /* = 1000.0f */)
 {
     centreOfBuoyancy = cOfB;
     Buoyancy::liquidDensity = liquidDensity;
@@ -29,11 +29,11 @@ Buoyancy::Buoyancy(const Vector3 &cOfB, marbs maxDepth, marbs volume,
     Buoyancy::waterHeight = waterHeight;
 }
 
-void Buoyancy::updateForce(RigidBody *body, marbs duration)
+void Buoyancy::UpdateForce(RigidBody *body, marb duration)
 {
     // Calculate the submersion depth
-    Vector3 pointInWorld = body->getPointInWorldSpace(centreOfBuoyancy);
-    marbs depth = pointInWorld.y;
+    Vector3 pointInWorld = body->GetPointInWorldSpace(centreOfBuoyancy);
+    marb depth = pointInWorld.y;
 
     // Check if we're out of the water
     if (depth >= waterHeight + maxDepth) return;
@@ -43,34 +43,34 @@ void Buoyancy::updateForce(RigidBody *body, marbs duration)
     if (depth <= waterHeight - maxDepth)
     {
         force.y = liquidDensity * volume;
-        body->addForceAtBodyPoint(force, centreOfBuoyancy);
+        body->AddForceAtBodyPoint(force, centreOfBuoyancy);
         return;
     }
 
     // Otherwise we are partly submerged
     force.y = liquidDensity * volume *
         (depth - maxDepth - waterHeight) / 2 * maxDepth;
-    body->addForceAtBodyPoint(force, centreOfBuoyancy);
+    body->AddForceAtBodyPoint(force, centreOfBuoyancy);
 }
 
 Gravity::Gravity(const Vector3& gravity): gravity(gravity)
 {
 }
 
-void Gravity::updateForce(RigidBody* body, marbs duration)
+void Gravity::UpdateForce(RigidBody* body, marb duration)
 {
     // Check that we do not have infinite mass
-    if (!body->hasFiniteMass()) return;
+    if (!body->HasFiniteMass()) return;
 
     // Apply the mass-scaled force to the body
-    body->addForce(gravity * body->getMass());
+    body->AddForce(gravity * body->GetMass());
 }
 
 Spring::Spring(const Vector3 &localConnectionPt,
                RigidBody *other,
                const Vector3 &otherConnectionPt,
-               marbs springConstant,
-               marbs restLength)
+               marb springConstant,
+               marb restLength)
 : connectionPoint(localConnectionPt),
   otherConnectionPoint(otherConnectionPt),
   other(other),
@@ -79,24 +79,24 @@ Spring::Spring(const Vector3 &localConnectionPt,
 {
 }
 
-void Spring::updateForce(RigidBody* body, marbs duration)
+void Spring::UpdateForce(RigidBody* body, marb duration)
 {
     // Calculate the two ends in world space
-    Vector3 lws = body->getPointInWorldSpace(connectionPoint);
-    Vector3 ows = other->getPointInWorldSpace(otherConnectionPoint);
+    Vector3 lws = body->GetPointInWorldSpace(connectionPoint);
+    Vector3 ows = other->GetPointInWorldSpace(otherConnectionPoint);
 
     // Calculate the vector of the spring
     Vector3 force = lws - ows;
 
     // Calculate the magnitude of the force
-    marbs magnitude = force.magnitude();
-    magnitude = marbs_abs(magnitude - restLength);
+    marb magnitude = force.Magnitude();
+    magnitude = marb_abs(magnitude - restLength);
     magnitude *= springConstant;
 
     // Calculate the final force and apply it
-    force.normalise();
+    force.Normalize();
     force *= -magnitude;
-    body->addForceAtPoint(force, lws);
+    body->AddForceAtPoint(force, lws);
 }
 
 Aero::Aero(const Matrix3 &tensor, const Vector3 &position, const Vector3 *windspeed)
@@ -106,27 +106,27 @@ Aero::Aero(const Matrix3 &tensor, const Vector3 &position, const Vector3 *windsp
     Aero::windspeed = windspeed;
 }
 
-void Aero::updateForce(RigidBody *body, marbs duration)
+void Aero::UpdateForce(RigidBody *body, marb duration)
 {
-    Aero::updateForceFromTensor(body, duration, tensor);
+    Aero::UpdateForceFromTensor(body, duration, tensor);
 }
 
-void Aero::updateForceFromTensor(RigidBody *body, marbs duration,
+void Aero::UpdateForceFromTensor(RigidBody *body, marb duration,
                                  const Matrix3 &tensor)
 {
     // Calculate total velocity (windspeed and body's velocity).
-    Vector3 velocity = body->getVelocity();
+    Vector3 velocity = body->GetVelocity();
     velocity += *windspeed;
 
     // Calculate the velocity in body coordinates
-    Vector3 bodyVel = body->getTransform().transformInverseDirection(velocity);
+    Vector3 bodyVel = body->GetTransform().TransformInverseDirection(velocity);
 
     // Calculate the force in body coordinates
-    Vector3 bodyForce = tensor.transform(bodyVel);
-    Vector3 force = body->getTransform().transformDirection(bodyForce);
+    Vector3 bodyForce = tensor.Transform(bodyVel);
+    Vector3 force = body->GetTransform().TransformDirection(bodyForce);
 
     // Apply the force
-    body->addForceAtBodyPoint(force, position);
+    body->AddForceAtBodyPoint(force, position);
 }
 
 AeroControl::AeroControl(const Matrix3 &base, const Matrix3 &min, const Matrix3 &max,
@@ -139,32 +139,32 @@ Aero(base, position, windspeed)
     controlSetting = 0.0f;
 }
 
-Matrix3 AeroControl::getTensor()
+Matrix3 AeroControl::GetTensor()
 {
     if (controlSetting <= -1.0f) return minTensor;
     else if (controlSetting >= 1.0f) return maxTensor;
     else if (controlSetting < 0)
     {
-        return Matrix3::linearInterpolate(minTensor, tensor, controlSetting+1.0f);
+        return Matrix3::LinearInterpolate(minTensor, tensor, controlSetting+1.0f);
     }
     else if (controlSetting > 0)
     {
-        return Matrix3::linearInterpolate(tensor, maxTensor, controlSetting);
+        return Matrix3::LinearInterpolate(tensor, maxTensor, controlSetting);
     }
     else return tensor;
 }
 
-void AeroControl::setControl(marbs value)
+void AeroControl::SetControl(marb value)
 {
     controlSetting = value;
 }
 
-void AeroControl::updateForce(RigidBody *body, marbs duration)
+void AeroControl::UpdateForce(RigidBody *body, marb duration)
 {
-    Matrix3 tensor = getTensor();
-    Aero::updateForceFromTensor(body, duration, tensor);
+    Matrix3 tensor = GetTensor();
+    Aero::UpdateForceFromTensor(body, duration, tensor);
 }
 
-void Explosion::updateForce(RigidBody* body, marbs duration)
+void Explosion::UpdateForce(RigidBody* body, marb duration)
 {
 }
