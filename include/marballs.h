@@ -30,6 +30,8 @@
 #include "pworld.h"
 #include "pfgen.h"
 #include "plinks.h"
+#include "fgen.h"
+#include "world.h"
 
 
 
