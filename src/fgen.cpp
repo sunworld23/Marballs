@@ -1,8 +1,8 @@
-#include "fgen.h"
+#include "marballs.h"
 
-using namespace cyclone;
+using namespace marballs;
 
-void ForceRegistry::updateForces(real duration)
+void ForceRegistry::updateForces(marbs duration)
 {
     Registry::iterator i = registrations.begin();
     for (; i != registrations.end(); i++)
@@ -19,8 +19,8 @@ void ForceRegistry::add(RigidBody *body, ForceGenerator *fg)
     registrations.push_back(registration);
 }
 
-Buoyancy::Buoyancy(const Vector3 &cOfB, real maxDepth, real volume,
-                   real waterHeight, real liquidDensity /* = 1000.0f */)
+Buoyancy::Buoyancy(const Vector3 &cOfB, marbs maxDepth, marbs volume,
+                   marbs waterHeight, marbs liquidDensity /* = 1000.0f */)
 {
     centreOfBuoyancy = cOfB;
     Buoyancy::liquidDensity = liquidDensity;
@@ -29,11 +29,11 @@ Buoyancy::Buoyancy(const Vector3 &cOfB, real maxDepth, real volume,
     Buoyancy::waterHeight = waterHeight;
 }
 
-void Buoyancy::updateForce(RigidBody *body, real duration)
+void Buoyancy::updateForce(RigidBody *body, marbs duration)
 {
     // Calculate the submersion depth
     Vector3 pointInWorld = body->getPointInWorldSpace(centreOfBuoyancy);
-    real depth = pointInWorld.y;
+    marbs depth = pointInWorld.y;
 
     // Check if we're out of the water
     if (depth >= waterHeight + maxDepth) return;
@@ -57,7 +57,7 @@ Gravity::Gravity(const Vector3& gravity): gravity(gravity)
 {
 }
 
-void Gravity::updateForce(RigidBody* body, real duration)
+void Gravity::updateForce(RigidBody* body, marbs duration)
 {
     // Check that we do not have infinite mass
     if (!body->hasFiniteMass()) return;
@@ -69,8 +69,8 @@ void Gravity::updateForce(RigidBody* body, real duration)
 Spring::Spring(const Vector3 &localConnectionPt,
                RigidBody *other,
                const Vector3 &otherConnectionPt,
-               real springConstant,
-               real restLength)
+               marbs springConstant,
+               marbs restLength)
 : connectionPoint(localConnectionPt),
   otherConnectionPoint(otherConnectionPt),
   other(other),
@@ -79,7 +79,7 @@ Spring::Spring(const Vector3 &localConnectionPt,
 {
 }
 
-void Spring::updateForce(RigidBody* body, real duration)
+void Spring::updateForce(RigidBody* body, marbs duration)
 {
     // Calculate the two ends in world space
     Vector3 lws = body->getPointInWorldSpace(connectionPoint);
@@ -89,8 +89,8 @@ void Spring::updateForce(RigidBody* body, real duration)
     Vector3 force = lws - ows;
 
     // Calculate the magnitude of the force
-    real magnitude = force.magnitude();
-    magnitude = real_abs(magnitude - restLength);
+    marbs magnitude = force.magnitude();
+    magnitude = marbs_abs(magnitude - restLength);
     magnitude *= springConstant;
 
     // Calculate the final force and apply it
@@ -106,12 +106,12 @@ Aero::Aero(const Matrix3 &tensor, const Vector3 &position, const Vector3 *windsp
     Aero::windspeed = windspeed;
 }
 
-void Aero::updateForce(RigidBody *body, real duration)
+void Aero::updateForce(RigidBody *body, marbs duration)
 {
     Aero::updateForceFromTensor(body, duration, tensor);
 }
 
-void Aero::updateForceFromTensor(RigidBody *body, real duration,
+void Aero::updateForceFromTensor(RigidBody *body, marbs duration,
                                  const Matrix3 &tensor)
 {
     // Calculate total velocity (windspeed and body's velocity).
@@ -154,17 +154,17 @@ Matrix3 AeroControl::getTensor()
     else return tensor;
 }
 
-void AeroControl::setControl(real value)
+void AeroControl::setControl(marbs value)
 {
     controlSetting = value;
 }
 
-void AeroControl::updateForce(RigidBody *body, real duration)
+void AeroControl::updateForce(RigidBody *body, marbs duration)
 {
     Matrix3 tensor = getTensor();
     Aero::updateForceFromTensor(body, duration, tensor);
 }
 
-void Explosion::updateForce(RigidBody* body, real duration)
+void Explosion::updateForce(RigidBody* body, marbs duration)
 {
 }

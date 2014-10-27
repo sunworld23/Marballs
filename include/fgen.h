@@ -1,7 +1,11 @@
 #ifndef FGEN_INCLUDED
 #define FGEN_INCLUDED
 
-namespace cyclone
+#include "body.h"
+#include "pfgen.h"
+#include <vector>
+
+namespace marballs
 {
     /**
     * A force generator that applies an aerodynamic force.
@@ -38,7 +42,7 @@ namespace cyclone
         /**
         * Applies the force to the given rigid body.
         */
-        virtual void updateForce(RigidBody *body, real duration);
+        virtual void updateForce(RigidBody *body, marbs duration);
     };
 
     /**
@@ -66,7 +70,7 @@ namespace cyclone
         * used) through 0 (where the base-class tensor value is used)
         * to +1 (where the maxTensor value is used).
         */
-        real controlSetting;
+        marbs controlSetting;
 
     private:
         /**
@@ -91,12 +95,12 @@ namespace cyclone
         * to +1 (where the maxTensor value is used). Values outside that
         * range give undefined results.
         */
-        void setControl(real value);
+        void setControl(marbs value);
 
         /**
         * Applies the force to the given rigid body.
         */
-        virtual void updateForce(RigidBody *body, real duration);
+        virtual void updateForce(RigidBody *body, marbs duration);
 
         };
 
