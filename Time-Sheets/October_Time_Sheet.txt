@@ -2,8 +2,9 @@
                                     ~ ~ ~ OCTOBER TIME SHEET ~ ~ ~ 
 ====================================================================================================
 10/30/2014:
-	Chris (60 min):
-	(60 min) - Worked up to page 241 on chapter 12.
+	Chris (120 min):
+	(120 min) - Finished chapter 12, implemented what it told me to but there are parts missing 
+		    from the code I think. This missing code probably will be added in later chapters.
 	
 10/25/2014:
 	Charlie (60 min):

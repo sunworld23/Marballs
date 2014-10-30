@@ -6,7 +6,7 @@
  * Last Revision: Nov. 30, 2014
  *
  * TO DO: - Continue following tutorial to fill this out
- *          (Page 241, section 12.3.2)
+ *          (Page 245)
  *************************************************************/
 
 #ifndef COARSE_COLLISION_INCLUDED
@@ -48,6 +48,15 @@ namespace marballs
             // in the tree hierarchy then stores them into an array. Returns
             // number of potential contacts found.
             unsigned GetPotentialContacts(PotentialContact* contacts, unsigned limit) const;
+
+            // Insert - inserts given rigid body and given bounding volume
+            // into the hierarchy (binary tree)
+            void Insert(RigidBody* body, const BoundingVolumeClass &volume);
+
+            // Deletes the node and removes it from the hierarchy.
+            // This includes removing its associated rigid body and
+            // preceding children nodes. Forces volume to recalculate
+            ~BVHNode();
 
      }; // End BVHNode class
 
@@ -111,6 +120,80 @@ namespace marballs
             {
                 return count;
             }
+        }
+    }
+
+    template<class BoundingVolumeClass>
+    void BVHNode<BoundingVolumeClass>::Insert(RigidBody* newBody, const BoundingVolumeClass &newVolume){
+        // If we are a leaf, then the only option is to spawn two
+        // new children and place the new body in one.
+        if (isLeaf())
+        {
+            // Child one is a copy of us.
+            children[0] = new BVHNode<BoundingVolumeClass>(this, volume, body)
+
+            // Child two holds the new body
+            children[1] = new BVHNode<BoundingVolumeClass>(this, newVolume, newBody);
+
+            // And we now loosen the body (we’re no longer a leaf).
+            this->body = NULL;
+
+            // We need to recalculate our bounding volume.
+            RecalculateBoundingVolume();
+        }
+        // Otherwise we need to work out which child gets to keep
+        // the inserted body. We give it to whoever would grow the
+        // least to incorporate it.
+        else
+        {
+            if (children[0]->volume.GetGrowth(newVolume) < children[1]->volume.GetGrowth(newVolume))
+            {
+                children[0]->Insert(newBody, newVolume);
+            }
+            else
+            {
+                children[1]->Insert(newBody, newVolume);
+            }
+        }
+    }
+
+    template<class BoundingVolumeClass>
+    BVHNode<BoundingVolumeClass>::~BVHNode<BoundingVolumeClass>(){
+        // If we don’t have a parent, then we ignore the sibling processing.
+        if (parent)
+        {
+            // Find our sibling.
+            BVHNode<BoundingVolumeClass> *sibling;
+            if (parent->children[0] == this) sibling = parent->children[1];
+            else sibling = parent->children[0];
+
+            // Write its data to our parent.
+            parent->volume = sibling->volume;
+            parent->body = sibling->body;
+            parent->children[0] = sibling->children[0];
+            parent->children[1] = sibling->children[1];
+
+            // Delete the sibling (we blank its parent and
+            // children to avoid processing/deleting them).
+            sibling->parent = NULL;
+            sibling->body = NULL;
+            sibling->children[0] = NULL;
+            sibling->children[1] = NULL;
+            delete sibling;
+
+            // Recalculate the parent’s bounding volume.
+            parent->recalculateBoundingVolume();
+        }
+
+        // Delete our children (again we remove their parent data so
+        // we don’t try to process their siblings as they are deleted).
+        if (children[0]) {
+            children[0]->parent = NULL;
+            delete children[0];
+        }
+        if (children[1]) {
+            children[1]->parent = NULL;
+            delete children[0];
         }
     }
 

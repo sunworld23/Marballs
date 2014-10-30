@@ -2,7 +2,9 @@
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
 October 30, 2014:
-	- Chris added one new file, coarse_collision.h (chapter unfinished)
+	- Chris added one new file, coarse_collision.h (There was a lot of code that was never specified to a header
+	  so I didn't know where to add it. I also think that code will be implemented later in the fine_collision
+	  section. It talked about using both coarse and fine collision systems together.)
 	
 October 25, 2014:
 	- Charlie added 4 new files (world.h, world.cpp, fgen.h, fgen.cpp)
