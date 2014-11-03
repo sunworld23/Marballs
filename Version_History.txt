@@ -1,6 +1,10 @@
 ====================================================================================================
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
+November 3, 2014:
+	- Charlie added 3 files: collide_fine.h, collide_fine.cpp, contacts.h
+	- Parts of the code will be implemented later
+
 October 30, 2014:
 	- Chris added one new file, coarse_collision.h (There was a lot of code that was never specified to a header
 	  so I didn't know where to add it. I also think that code will be implemented later in the fine_collision
