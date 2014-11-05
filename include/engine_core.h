@@ -509,6 +509,18 @@ namespace marballs {
 
         // Interpolates a couple of matrices.
         static Matrix3 LinearInterpolate(const Matrix3& a, const Matrix3& b, marb prop);
+        
+        void SetComponents(const Vector3 &compOne, const Vector3 &compTwo, const Vector3 &compThree){
+            data[0] = compOne.x;
+            data[1] = compTwo.x;
+            data[2] = compThree.x;
+            data[3] = compOne.y;
+            data[4] = compTwo.y;
+            data[5] = compThree.y;
+            data[6] = compOne.z;
+            data[7] = compTwo.z;
+            data[8] = compThree.z;
+        }
 
     };//End of Matrix3 class
 
