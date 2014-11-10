@@ -1,9 +1,13 @@
 ====================================================================================================
                                     ~ ~ ~ NOVEMBER TIME SHEET ~ ~ ~ 
 ====================================================================================================
+11/09/2014:
+	Kyle (210 min):
+	90 minutes  - Catching up on reading and commits.
+	120 minutes - Attempted finishing chapter 15. Does not compile.
 11/03/2014:
-	Charlie 60 min):
-	60 min) - Finished chapter 13, parts missing from the code
+	Charlie (60 min):
+	60 min - Finished chapter 13, parts missing from the code
 
 11/05/2014:
 	Brenton (90 min):

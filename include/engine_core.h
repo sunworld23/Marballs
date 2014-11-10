@@ -4,7 +4,7 @@
  * Header file for the physics engine core. Defines
  * vectors and their functions.
  *
- * Last Revision: Oct. 21, 2014
+ * Last Revision: Nov. 9, 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *************************************************************/
@@ -435,7 +435,7 @@ namespace marballs {
         }
 
         // Inverts the matrix
-        void invert()
+        void Invert()
         {
             SetInverse(*this);
         }
@@ -509,7 +509,7 @@ namespace marballs {
 
         // Interpolates a couple of matrices.
         static Matrix3 LinearInterpolate(const Matrix3& a, const Matrix3& b, marb prop);
-        
+
         void SetComponents(const Vector3 &compOne, const Vector3 &compTwo, const Vector3 &compThree){
             data[0] = compOne.x;
             data[1] = compTwo.x;
@@ -520,6 +520,24 @@ namespace marballs {
             data[6] = compOne.z;
             data[7] = compTwo.z;
             data[8] = compThree.z;
+        }
+
+        /**
+        * Sets the matrix to be a skew-symmetric matrix based on
+        * the given vector. The skew-symmetric matrix is the equivalent
+        * of the vector product. So if a,b are vectors, a x b = A_s b
+        * where A_s is the skew-symmetric form of a.
+        */
+        // SetSkewSymmetric - Sets the matrix to be skew-symmetric form of the given vector.
+        //                    a x b = A_s b where A_s is the skew-symmetric form of a.
+        void SetSkewSymmetric(const Vector3 vector) {
+            data[0] = data[4] = data[8] = 0;
+            data[1] = -vector.z;
+            data[2] = vector.y;
+            data[3] = vector.z;
+            data[5] = -vector.x;
+            data[6] = -vector.y;
+            data[7] = vector.x;
         }
 
     };//End of Matrix3 class

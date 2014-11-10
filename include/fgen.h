@@ -1,3 +1,21 @@
+/*************************************************************
+ * fgen.h
+ * -------------
+ * Header file that defines force generators which
+ * add forces to one or more rigidbodies.
+ *
+ * Last Revision: Nov. 9, 2014
+ *
+ * NOTE: This is the one RigidBodies use!
+ *
+ * TO DO: - Format and comment properly.
+ *              * Function explanation/purpose comments.
+ *              * Convert to // comments rather than /*.
+ *              * Opening bracket placement.
+ *              * Properly capitalize function names.
+ *        - Debug.
+ *************************************************************/
+
 #ifndef FGEN_INCLUDED
 #define FGEN_INCLUDED
 

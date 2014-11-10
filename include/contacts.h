@@ -1,3 +1,14 @@
+/*******************************************************************
+ * contacts.h
+ * -------------
+ * Header file for contact classes.
+ *
+ * Last Revision: Nov. 9, 2014
+ *
+ * TO DO: - Format comments properly.
+ *        - Debug (ensure that everything is in here that should be!)
+ ********************************************************************/
+
 /**
 * A contact represents two bodies in contact. Resolving a
 * contact removes their interpenetration, and applies sufficient
@@ -10,32 +21,27 @@
 #ifndef CONTACT_INCLUDED
 #define CONTACT_INCLUDED
 
-#include "engine_core.h"
+#include "body.h"
 
 namespace marballs
 {
 
-    class Contact
-    {
-        // Holds the position of the contact
-        Vector3 contactPoint;
+    class ContactResolver; // Forward declaration so compiler knows it's there.
 
-        // Holds the direction of the contact
-        Vector3 contactNormal;
-
-        /*
-        * Holds the depth of penetration at the contact point. If both
-        * bodies are specified then the contact point should be midway
-        * between the inter-penetrating points.
-        */
-        marb penetration;
+    class Contact {
         
+        Vector3 contactPoint; // Holds the position of the contact        
+        Vector3 contactNormal; // Holds the direction of the contact
+
+        marb penetration; // Holds depth of penetration at contact point.
+						  // If both bodies specified, point should be halfway between penetrating points.
+
         /**
          * The contact resolver object needs access into the contacts to
          * set and effect the contact.
          */
         friend ContactResolver;
-        
+
         protected:
             /**
              * A transform matrix that converts coordinates in the contact’s
@@ -52,7 +58,7 @@ namespace marballs
              * Holds the required change in velocity for this contact to be
              * resolved.
              */
-            real desiredDeltaVelocity;
+            marb desiredDeltaVelocity;
             /**
              * Holds the world space position of the contact point
              * relative to the center of each body. This is set when
@@ -65,20 +71,19 @@ namespace marballs
      * can be shared for the whole simulation, as long as you need
      * roughly the same parameters each time (which is normal).
      */
-    class ContactResolver
-    {
+    class ContactResolver {
         public:
-         void ResolveContacts(Contact *contactArray, unsigned numContacts, real duration);
-        
+         void ResolveContacts(Contact *contactArray, unsigned numContacts, marb duration);
+
         protected:
             /**
              * Sets up contacts ready for processing. This makes sure their
              * internal data is configured correctly and the correct set of
              * bodies is made alive.
              */
-            void PrepareContacts(Contact *contactArray, unsigned numContacts, real duration);
+            void PrepareContacts(Contact *contactArray, unsigned numContacts, marb duration);
     };
-         
+
 
 
 }
