@@ -1,6 +1,10 @@
 ====================================================================================================
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~ 
 ====================================================================================================
+November 9, 2014:
+	- Kyle added what of Chapter 15 he could.
+	- Kyle made note of some issues and fixed some formatting.
+
 November 3, 2014:
 	- Charlie added 3 files: collide_fine.h, collide_fine.cpp, contacts.h
 	- Parts of the code will be implemented later

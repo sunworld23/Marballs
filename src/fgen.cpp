@@ -1,7 +1,24 @@
+/*************************************************************
+ * fgen.cpp
+ * -------------
+ * Implementation of force generator class functions.
+ *
+ * Last Revision: Nov. 9, 2014
+ *
+ * NOTE: This is the class used for forces on RigidBodies.
+ *
+ * TO DO: - Format and comment properly.
+ *              * Function explanation/purpose comments.
+ *              * Opening bracket placement.
+ *              * Properly capitalize function names.
+ *        - Debug.
+ *************************************************************/
+
 #include "fgen.h"
 
 using namespace marballs;
 
+// UpdateForces - Simulates force interactions that occurred in the given duration.
 void ForceRegistry::UpdateForces(marb duration)
 {
     Registry::iterator i = registrations.begin();
@@ -11,6 +28,7 @@ void ForceRegistry::UpdateForces(marb duration)
     }
 }
 
+// Add - Registers a rigidbody-force pair.
 void ForceRegistry::Add(RigidBody *body, ForceGenerator *fg)
 {
     ForceRegistry::ForceRegistration registration;
@@ -19,6 +37,7 @@ void ForceRegistry::Add(RigidBody *body, ForceGenerator *fg)
     registrations.push_back(registration);
 }
 
+// Buoyancy Constructor
 Buoyancy::Buoyancy(const Vector3 &cOfB, marb maxDepth, marb volume,
                    marb waterHeight, marb liquidDensity /* = 1000.0f */)
 {
@@ -29,6 +48,7 @@ Buoyancy::Buoyancy(const Vector3 &cOfB, marb maxDepth, marb volume,
     Buoyancy::waterHeight = waterHeight;
 }
 
+// UpdateForce - Applies force to the given rigidbody for the given duration.
 void Buoyancy::UpdateForce(RigidBody *body, marb duration)
 {
     // Calculate the submersion depth

@@ -1,10 +1,24 @@
+/*************************************************************
+ * collide_fine.cpp
+ * -------------
+ * Implementation of fine collision functions.
+ *
+ * Last Revision: Nov. 9, 2014
+ *
+ * TO DO: - Format and comment properly.
+ *              * Function explanation/purpose comments.
+ *              * Opening bracket placement.
+ *              * Properly capitalize function names.
+ *        - Debug (functions need to be declared in header!)
+ *				  (members need to be accessible by inheritors!)
+ *************************************************************/
+
+#include "collide_fine.h"
+
 using namespace marballs;
 
-unsigned CollisionDetector::SphereAndSphere(
-const Sphere &one,
-const Sphere &two,
-CollisionData *data)
-{
+unsigned CollisionDetector::SphereAndSphere(const Sphere &one, const Sphere &two, CollisionData *data) {
+
     // Make sure we have contacts.
     if (data->contactsLeft <= 0) return 0;
 
@@ -35,11 +49,7 @@ CollisionData *data)
 }
 
 
-unsigned CollisionDetector::sphereAndHalfSpace(
-const Sphere &sphere,
-const Plane &plane,
-CollisionData *data)
-{
+unsigned CollisionDetector::sphereAndHalfSpace(const Sphere &sphere, const Plane &plane, CollisionData *data) {
     // Make sure we have contacts.
     if (data->contactsLeft <= 0) return 0;
 
@@ -67,10 +77,7 @@ CollisionData *data)
 }
 
 
-unsigned CollisionDetector::sphereAndTruePlane(
-const Sphere &sphere,
-const Plane &plane,
-CollisionData *data)
+unsigned CollisionDetector::sphereAndTruePlane(const Sphere &sphere, const Plane &plane, CollisionData *data)
 {
     // Make sure we have contacts.
     if (data->contactsLeft <= 0) return 0;
@@ -107,18 +114,15 @@ CollisionData *data)
 }
 
 
-unsigned CollisionDetector::boxAndSphere(
-const Box &box,
-const Sphere &sphere,
-CollisionData *data)
+unsigned CollisionDetector::boxAndSphere(const Box &box, const Sphere &sphere, CollisionData *data)
 {
     // Transform the center of the sphere into box coordinates.
     Vector3 center = sphere.GetAxis(3);
     Vector3 relCenter = box.transform.TransformInverse(center);
     // Early-out check to see if we can exclude the contact.
-    if (real_abs(relCenter.x) - sphere.radius > box.halfSize.x ||
-    real_abs(relCenter.y) - sphere.radius > box.halfSize.y ||
-    real_abs(relCenter.z) - sphere.radius > box.halfSize.z)
+    if (marb_abs(relCenter.x) - sphere.radius > box.halfSize.x ||
+    marb_abs(relCenter.y) - sphere.radius > box.halfSize.y ||
+    marb_abs(relCenter.z) - sphere.radius > box.halfSize.z)
         return 0;
 
     Vector3 closestPt(0,0,0);
@@ -159,10 +163,7 @@ CollisionData *data)
 }
 
 
-unsigned CollisionDetector::boxAndPoint(
-const Box &box,
-const Vector3 &point,
-CollisionData *data)
+unsigned CollisionDetector::boxAndPoint(const Box &box, const Vector3 &point, CollisionData *data)
 {
     // Transform the point into box coordinates.
     Vector3 relPt = box.transform.TransformInverse(point);

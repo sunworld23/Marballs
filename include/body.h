@@ -3,10 +3,10 @@
  * -------------
  * Header file that defines the body for rigid bodies.
  *
- * Last Revision: Oct. 25, 2014
+ * Last Revision: Nov. 9, 2014
  *
  * TO DO: - Continue following book to fill this out.
- *		  - Additional commenting/polish format
+ *		  - Add/reformat additional comments?
  *************************************************************/
 
 #ifndef MARBALLS_BODY_H
@@ -16,19 +16,20 @@
 
 namespace marballs {
 
-	class RigidBody{
+	class RigidBody {
 
-		//Variable declarations
+		// Variable declarations
 		public:
-		marb inverseMass;		//Holds inverse mass of the rigid body
-		Vector3 position;		//Holds linear position of the rigid body
-		Quaternion orientation;	//Holds angular orientation of the rigid body
-		Vector3 velocity;		//Holds the velocity of the rigid body
-		Vector3 rotation;		//Holds the rotation of the rigid body
-		Matrix4 transformMatrix;//Holds matrix to convert body space to world space and vice versa
-		marb angularDamping; 	//Holds damping applied to angular motion
+		marb inverseMass;			// Holds inverse mass of the rigid body
+		Vector3 position;			// Holds linear position of the rigid body
+		Quaternion orientation;		// Holds angular orientation of the rigid body
+		Vector3 velocity;			// Holds the velocity of the rigid body
+		Vector3 rotation;			// Holds the rotation of the rigid body
+		Matrix4 transformMatrix;	// Holds matrix to convert body space to world space and vice versa
+		marb angularDamping; 		// Holds damping applied to angular motion
 		marb linearDamping;
 
+									// Need comments for the below variables too!
         marb motion;
         Vector3 forceAccum;
         Vector3 torqueAccum;
@@ -37,8 +38,8 @@ namespace marballs {
         Vector3 acceleration;
 		Vector3 lastFrameAcceleration;
 
-		bool isAwake;
-		bool canSleep;
+		bool isAwake;	// Whether the body is awake and mobile or not.
+		bool canSleep;	// Whether the body can be put to sleep or not.
 
 		//Function declarations
 		public:
@@ -125,8 +126,7 @@ namespace marballs {
          *
          * @return The awake state of the body.
          */
-        bool GetAwake() const
-        {
+        bool GetAwake() const {
             return isAwake;
         }
         void SetAwake(const bool awake=true);
@@ -135,8 +135,7 @@ namespace marballs {
          * Returns true if the body is allowed to go to sleep at
          * any time.
          */
-        bool GetCanSleep() const
-        {
+        bool GetCanSleep() const {
             return canSleep;
         }
         void SetCanSleep(const bool canSleep=true);
