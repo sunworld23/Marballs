@@ -4,7 +4,7 @@
  * Header file for the physics engine core. Defines
  * vectors and their functions.
  *
- * Last Revision: Nov. 9, 2014
+ * Last Revision: Nov. 16, 2014
  *
  * TO DO: - Continue following tutorial to fill this out.
  *************************************************************/
@@ -522,12 +522,6 @@ namespace marballs {
             data[8] = compThree.z;
         }
 
-        /**
-        * Sets the matrix to be a skew-symmetric matrix based on
-        * the given vector. The skew-symmetric matrix is the equivalent
-        * of the vector product. So if a,b are vectors, a x b = A_s b
-        * where A_s is the skew-symmetric form of a.
-        */
         // SetSkewSymmetric - Sets the matrix to be skew-symmetric form of the given vector.
         //                    a x b = A_s b where A_s is the skew-symmetric form of a.
         void SetSkewSymmetric(const Vector3 vector) {

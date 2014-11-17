@@ -3,14 +3,11 @@
  * -------------
  * Implementation of fine collision functions.
  *
- * Last Revision: Nov. 9, 2014
+ * Last Revision: Nov. 16, 2014
  *
- * TO DO: - Format and comment properly.
- *              * Function explanation/purpose comments.
- *              * Opening bracket placement.
- *              * Properly capitalize function names.
- *        - Debug (functions need to be declared in header!)
- *				  (members need to be accessible by inheritors!)
+ * TO DO: - Debug (functions need to be declared in header!)
+ *        (members need to be accessible by inheritors!)
+ *
  *************************************************************/
 
 #include "collide_fine.h"

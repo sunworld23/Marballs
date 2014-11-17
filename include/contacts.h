@@ -3,7 +3,7 @@
  * -------------
  * Header file for contact classes.
  *
- * Last Revision: Nov. 9, 2014
+ * Last Revision: Nov. 16, 2014
  *
  * TO DO: - Format comments properly.
  *        - Debug (ensure that everything is in here that should be!)
@@ -23,70 +23,52 @@
 
 #include "body.h"
 
-namespace marballs
-{
+namespace marballs {
 
     class ContactResolver; // Forward declaration so compiler knows it's there.
 
     class Contact {
-        
-        Vector3 contactPoint; // Holds the position of the contact        
+
+        Vector3 contactPoint; // Holds the position of the contact
         Vector3 contactNormal; // Holds the direction of the contact
 
         marb penetration; // Holds depth of penetration at contact point.
 						  // If both bodies specified, point should be halfway between penetrating points.
 
-        /**
-         * The contact resolver object needs access into the contacts to
-         * set and effect the contact.
-         */
+        // The contact resolver needs access into the contacts to set and effect the contact
         friend ContactResolver;
 
         protected:
-            /**
-             * A transform matrix that converts coordinates in the contact’s
-             * frame of reference to world coordinates. The columns of this
-             * matrix form an orthonormal set of vectors.
-             */
-            Matrix3 contactToWorld;
-            /**
-             * Holds the closing velocity at the point of contact. This is
-             * set when the calculateInternals function is run.
-             */
-            Vector3 contactVelocity;
-            /**
-             * Holds the required change in velocity for this contact to be
-             * resolved.
-             */
-            marb desiredDeltaVelocity;
-            /**
-             * Holds the world space position of the contact point
-             * relative to the center of each body. This is set when
-             * the calculateInternals function is run.
-             */
-            Vector3 relativeContactPosition[2];
+
+            Matrix3 contactToWorld; // A transform matrix that converts coordinates in the contact's
+                                    // frame of reference to world coordinates.
+
+            Vector3 contactVelocity; // Holds closing velocity at point of contact
+                                    // NOTE - this is set when CalculateInternals function is ran.
+
+            marb desiredDeltaVelocity; // Holds required change in velocity for this contact to be resolved.
+
+            Vector3 relativeContactPosition[2]; // holds the world space position of the contact point relative to
+                                                // the center of each body.
+                                                // NOTE - this is set when CalculateInternals function is ran.
     };
-    /**
-     * The contact resolution routine. One resolver instance
-     * can be shared for the whole simulation, as long as you need
-     * roughly the same parameters each time (which is normal).
-     */
+    // NOTE:
+    // The contact resolution routine. One resolver instance
+    // can be shared for the whole simulation, as long as you need
+    // roughly the same parameters each time (which is normal).
+
     class ContactResolver {
         public:
          void ResolveContacts(Contact *contactArray, unsigned numContacts, marb duration);
 
         protected:
-            /**
-             * Sets up contacts ready for processing. This makes sure their
-             * internal data is configured correctly and the correct set of
-             * bodies is made alive.
-             */
+            // PrepareContacts - Sets up contacts so they are ready for processing.
+            // Also checks to make sure internal data is configured correctly and
+            // that it is the correct set of bodies alive.
             void PrepareContacts(Contact *contactArray, unsigned numContacts, marb duration);
     };
 
-
-
-}
+} // end marballs namespace
 
 
 

@@ -3,11 +3,9 @@
  * -------------
  * Source file that implements the RigidBody class.
  *
- * Last Revision: Nov. 8, 2014
+ * Last Revision: Nov. 16, 2014
  *
- * TO DO: - Fix formatting and comments.
- *				* Capitalize function names if underscore is unneeded.
- *				* Add comments to getters and setters.
+ * TO DO: - Debug
  ***************************************************************/
 
 #include "body.h"
@@ -16,29 +14,19 @@
 
 using namespace marballs;
 
-/*
- * --------------------------------------------------------------------------
- * INTERNAL OR HELPER FUNCTIONS:
- * --------------------------------------------------------------------------
- */
-
-/**
- * Internal function that checks the validity of an inverse inertia tensor.
- */
+// _checkInverseInertiaTensor - Internal function that checks the validity of an inverse inertia tensor.
 static inline void _checkInverseInertiaTensor(const Matrix3 &iitWorld) {
     // TODO: Perform a validity check in an assert.
 }
 
-/**
- * Internal function to do an intertia tensor transform by a quaternion.
- * Note that the implementation of this function was created by an
- * automated code-generator and optimizer.
- */
+// _transformInertiaTensor - Internal function to do an intertia tensor transform by a quaternion.
+// Note that the implementation of this function was created by an
+// automated code-generator and optimizer.
 static inline void _transformInertiaTensor(Matrix3 &iitWorld,
                                            const Quaternion &q,
                                            const Matrix3 &iitBody,
-                                           const Matrix4 &rotmat)
-{
+                                           const Matrix4 &rotmat) {
+
     marb t4 = rotmat.data[0]*iitBody.data[0]+
         rotmat.data[1]*iitBody.data[3]+
         rotmat.data[2]*iitBody.data[6];
@@ -96,14 +84,12 @@ static inline void _transformInertiaTensor(Matrix3 &iitWorld,
         t62*rotmat.data[10];
 }
 
-/**
- * Inline function that creates a transform matrix from a
- * position and orientation.
- */
+// CalculateTransformMatrix -  Inline function that creates a transform matrix from a
+// position and orientation.
 static inline void _calculateTransformMatrix(Matrix4 &transformMatrix,
                                              const Vector3 &position,
-                                             const Quaternion &orientation)
-{
+                                             const Quaternion &orientation) {
+
     transformMatrix.data[0] = 1-2*orientation.j*orientation.j-
         2*orientation.k*orientation.k;
     transformMatrix.data[1] = 2*orientation.i*orientation.j -

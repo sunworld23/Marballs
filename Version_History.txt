@@ -1,6 +1,10 @@
 ====================================================================================================
-                                    ~ ~ ~ VERSION HISTORY ~ ~ ~ 
+                                    ~ ~ ~ VERSION HISTORY ~ ~ ~
 ====================================================================================================
+
+November 16, 2014:
+    - Chris fixed some more formatting, everything Kyle highlighted should be good
+
 November 9, 2014:
 	- Kyle added what of Chapter 15 he could.
 	- Kyle made note of some issues and fixed some formatting.
@@ -13,7 +17,7 @@ October 30, 2014:
 	- Chris added one new file, coarse_collision.h (There was a lot of code that was never specified to a header
 	  so I didn't know where to add it. I also think that code will be implemented later in the fine_collision
 	  section. It talked about using both coarse and fine collision systems together.)
-	
+
 October 25, 2014:
 	- Charlie added 4 new files (world.h, world.cpp, fgen.h, fgen.cpp)
 
@@ -46,19 +50,19 @@ Sept. 24, 2014:
 	- Chris fixed engine_core.h, a few bugs existed
 	- Time sheet folder exists, separated by months
 	- Brenton implemented the rest of chapter 3 particle.h file
-	
+
 Sept. 22, 2014:
 	- Kyle updated engine_core.h with content up to the beginning of Chapter 3 (pg. 42-43 of tutorial).
 	- Added particle.h for someone to fill when they get the chance.
 	- Version History exists.
 	- README.md actually contains useful information.
-	
+
 Sept. 19, 2014:
 	- Kyle reformatted comments to be nitpicky and clean.
-	
+
 Sept. 17, 2014:
 	- Chris updated and renamed Engine_Core.h to engine_core.h.
 	- Chris updated and renamed Decimal_Precision.h to decimal_precision.h.
-	
+
 Sept. 15, 2014:
 	- Charlie performs the initial commit. Mr. Sun says, "Let there be light."

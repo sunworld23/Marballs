@@ -1,6 +1,10 @@
 ====================================================================================================
-                                    ~ ~ ~ NOVEMBER TIME SHEET ~ ~ ~ 
+                                    ~ ~ ~ NOVEMBER TIME SHEET ~ ~ ~
 ====================================================================================================
+11/16/2014:
+    Chris (90 min):
+    90 minutes - fixed formatting errors that were pointed out by Kyle
+
 11/09/2014:
 	Kyle (210 min):
 	90 minutes  - Catching up on reading and commits.

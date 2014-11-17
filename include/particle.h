@@ -4,7 +4,7 @@
  * Header file that defines the simplest physics simulated object.
  * Particle class is not to be confused with particle physics.
  *
- * Last Revision: Sept. 29, 2014
+ * Last Revision: November 16, 2014
  *
  * TO DO: - Polish formatting. This file's mostly done.
  *************************************************************/
@@ -18,10 +18,9 @@
 
 #include "engine_core.h"
 
-namespace marballs
-{
-    class Particle
-    {
+namespace marballs {
+
+    class Particle {
         /*********************************
         *     Variable Declarations
         *********************************/

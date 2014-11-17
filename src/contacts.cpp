@@ -3,12 +3,10 @@
  * -------------
  * Source file that implements Contact class functions.
  *
- * Last Revision: Nov. 9, 2014
+ * Last Revision: Nov. 16, 2014
  *
- * TO DO: - Format and comment properly.
- *              * Function explanation/purpose comments.
- *              * Properly capitalize function names.
- *        - Debug.
+ * TO DO: - Debug.
+ *
  *************************************************************/
 
 #include "marballs.h"
@@ -216,7 +214,7 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
             marb totalMove = angularMove[i] + linearMove[i];
             angularMove[i] = -maxMagnitude;
             linearMove[i] = totalMove - angularMove[i];
-			
+
         } else if (angularMove[i] > maxMagnitude) {
             marb totalMove = angularMove[i] + linearMove[i];
             angularMove[i] = maxMagnitude;
@@ -229,7 +227,7 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
         if (angularMove[i] == 0) {
             // Easy case - no angular movement means no rotation.
             angularChange[i].clear();
-			
+
         } else {
             // Work out the direction we'd like to rotate in.
             Vector3 targetAngularDirection =
