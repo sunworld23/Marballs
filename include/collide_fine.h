@@ -26,23 +26,30 @@ namespace marballs {
 
         // Holds the maximum number of contacts in the array.
         unsigned contactsLeft;
+
+        marb friction;   // Holds the friction value of collision.
+
+        marb restitution; // Holds the restitution value of collision.
+
     };
 
     class Primitive {
     public:
         RigidBody *body;
         Matrix4 offset;
+
+        Vector3 GetAxis(unsigned index) const
+        {
+            return transform.GetAxisVector(index);
+        }
+
+        Matrix4 transform;
+
     };
 
     void DetectContacts(const Primitive &firstPrimitive,
         const Primitive &secondPrimitive,
         CollisionData *data);
-
-    /*class Sphere { // Defined twice. If it was supposed to be like this, Code Blocks didn't like it.
-    public:
-        Vector3 position;
-        marb radius;
-    };*/
 
     class Sphere : public Primitive {
     public:
@@ -52,14 +59,29 @@ namespace marballs {
 
     class Plane : public Primitive {
     public:
-        Vector3 normal;
+        Vector3 direction; // Plane normal
         marb offset;
     };
 
+    class Box : public Primitive {
+    public:
+        Vector3 halfSize;
+    };
+
+    class CollisionDetector {
+    /** Function Declaration **/
+    public:
+        unsigned SphereAndSphere(const Sphere &one, const Sphere &two, CollisionData *data);
+        unsigned SphereAndHalfSpace(const Sphere &sphere, const Plane &plane, CollisionData *data);
+        unsigned SphereAndTruePlane(const Sphere &sphere, const Plane &plane, CollisionData *data);
+
+        unsigned BoxAndSphere(const Box &box, const Sphere &sphere, CollisionData *data);
+        unsigned BoxAndPoint(const Box &box, const Vector3 &point, CollisionData *data);
+    };
 
 
 
 }
 
 
-#endif COLLIDE_FINE_INCLUDED
+#endif // COLLIDE_FINE_INCLUDED

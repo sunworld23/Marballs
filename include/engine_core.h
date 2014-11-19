@@ -206,7 +206,7 @@ namespace marballs {
             }
 
             // * Operator Overload - returns a copy of this Vector3 multiplied by a scalar
-            Vector3 operator*(const marb scalar) {
+            Vector3 operator*(const marb scalar) const {
                 return Vector3(x*scalar, y*scalar, z*scalar);
             }
 
@@ -709,6 +709,13 @@ namespace marballs {
             array[14] = (float)data[11];
             array[15] = (float)1;
         }
+
+
+        Vector3 GetAxisVector(int i) const
+        {
+            return Vector3(data[i], data[i+4], data[i+8]);
+        }
+
     }; //End of Matrix4 class
 
 } // End of namespace.
