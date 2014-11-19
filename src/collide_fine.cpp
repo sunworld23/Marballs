@@ -46,7 +46,7 @@ unsigned CollisionDetector::SphereAndSphere(const Sphere &one, const Sphere &two
 }
 
 
-unsigned CollisionDetector::sphereAndHalfSpace(const Sphere &sphere, const Plane &plane, CollisionData *data) {
+unsigned CollisionDetector::SphereAndHalfSpace(const Sphere &sphere, const Plane &plane, CollisionData *data) {
     // Make sure we have contacts.
     if (data->contactsLeft <= 0) return 0;
 
@@ -55,7 +55,7 @@ unsigned CollisionDetector::sphereAndHalfSpace(const Sphere &sphere, const Plane
 
     // Find the distance from the plane.
     marb ballDistance =
-    plane.direction * position sphere.radius - plane.offset;
+    plane.direction * position - sphere.radius - plane.offset;
     if (ballDistance >= 0) return 0;
 
     // Create the contact - it has a normal in the plane direction.
@@ -63,7 +63,7 @@ unsigned CollisionDetector::sphereAndHalfSpace(const Sphere &sphere, const Plane
     contact->contactNormal = plane.direction;
     contact->penetration = -ballDistance;
     contact->contactPoint =
-    position - plane.direction * (ballDistance + sphere.radius);
+        position - plane.direction * (ballDistance + sphere.radius);
 
     // Write the appropriate data.
     contact->body[0] = sphere.body;
@@ -74,7 +74,7 @@ unsigned CollisionDetector::sphereAndHalfSpace(const Sphere &sphere, const Plane
 }
 
 
-unsigned CollisionDetector::sphereAndTruePlane(const Sphere &sphere, const Plane &plane, CollisionData *data)
+unsigned CollisionDetector::SphereAndTruePlane(const Sphere &sphere, const Plane &plane, CollisionData *data)
 {
     // Make sure we have contacts.
     if (data->contactsLeft <= 0) return 0;
@@ -111,7 +111,7 @@ unsigned CollisionDetector::sphereAndTruePlane(const Sphere &sphere, const Plane
 }
 
 
-unsigned CollisionDetector::boxAndSphere(const Box &box, const Sphere &sphere, CollisionData *data)
+unsigned CollisionDetector::BoxAndSphere(const Box &box, const Sphere &sphere, CollisionData *data)
 {
     // Transform the center of the sphere into box coordinates.
     Vector3 center = sphere.GetAxis(3);
@@ -144,10 +144,10 @@ unsigned CollisionDetector::boxAndSphere(const Box &box, const Sphere &sphere, C
     if (dist > sphere.radius * sphere.radius) return 0;
 
     // Compile the contact.
-    Vector3 closestPtWorld = box.transform.transform(closestPt);
+    Vector3 closestPtWorld = box.transform.Transform(closestPt);
     Contact* contact = data->contacts;
     contact->contactNormal = (center - closestPtWorld);
-    contact->contactNormal.normalize();
+    contact->contactNormal.Normalize();
     contact->contactPoint = closestPtWorld;
     contact->penetration = sphere.radius - marb_sqrt(dist);
 
@@ -160,7 +160,7 @@ unsigned CollisionDetector::boxAndSphere(const Box &box, const Sphere &sphere, C
 }
 
 
-unsigned CollisionDetector::boxAndPoint(const Box &box, const Vector3 &point, CollisionData *data)
+unsigned CollisionDetector::BoxAndPoint(const Box &box, const Vector3 &point, CollisionData *data)
 {
     // Transform the point into box coordinates.
     Vector3 relPt = box.transform.TransformInverse(point);

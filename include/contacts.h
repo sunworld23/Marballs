@@ -28,15 +28,19 @@ namespace marballs {
     class ContactResolver; // Forward declaration so compiler knows it's there.
 
     class Contact {
+        // The contact resolver needs access into the contacts to set and effect the contact
+        friend ContactResolver;
+        public:
+        RigidBody* body[2]; // Holds bodies involved in the contact
+
+        marb friction; // Lateral friction coefficient
+        marb restitution; // Normal restitution coefficient
 
         Vector3 contactPoint; // Holds the position of the contact
         Vector3 contactNormal; // Holds the direction of the contact
 
         marb penetration; // Holds depth of penetration at contact point.
 						  // If both bodies specified, point should be halfway between penetrating points.
-
-        // The contact resolver needs access into the contacts to set and effect the contact
-        friend ContactResolver;
 
         protected:
 
