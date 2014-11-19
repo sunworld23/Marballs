@@ -1,6 +1,11 @@
 ====================================================================================================
                                     ~ ~ ~ NOVEMBER TIME SHEET ~ ~ ~
 ====================================================================================================
+11/19/2014:
+    Chris (120 min):
+    120 min - Fixed errors pertaining to mainly lack of capitalization (copying and pasting caused
+    	      most errors probably) in the files pfgen.cpp, engine_core.h, contacts.h, contacts.cpp
+    	      
 11/16/2014:
     Chris (90 min):
     90 minutes - fixed formatting errors that were pointed out by Kyle
