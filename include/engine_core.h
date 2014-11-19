@@ -396,8 +396,56 @@ namespace marballs {
                    );
         }
 
-        // Sets the matrix to be the inverse of the given matrix. Parameter is the matrix to invert.
 
+        // *= -  Multiplies this matrix in place by the given other matrix.
+        void operator*=(const Matrix3 &o)
+        {
+            marb t1;
+            marb t2;
+            marb t3;
+
+            t1 = data[0]*o.data[0] + data[1]*o.data[3] + data[2]*o.data[6];
+            t2 = data[0]*o.data[1] + data[1]*o.data[4] + data[2]*o.data[7];
+            t3 = data[0]*o.data[2] + data[1]*o.data[5] + data[2]*o.data[8];
+            data[0] = t1;
+            data[1] = t2;
+            data[2] = t3;
+
+            t1 = data[3]*o.data[0] + data[4]*o.data[3] + data[5]*o.data[6];
+            t2 = data[3]*o.data[1] + data[4]*o.data[4] + data[5]*o.data[7];
+            t3 = data[3]*o.data[2] + data[4]*o.data[5] + data[5]*o.data[8];
+            data[3] = t1;
+            data[4] = t2;
+            data[5] = t3;
+
+            t1 = data[6]*o.data[0] + data[7]*o.data[3] + data[8]*o.data[6];
+            t2 = data[6]*o.data[1] + data[7]*o.data[4] + data[8]*o.data[7];
+            t3 = data[6]*o.data[2] + data[7]*o.data[5] + data[8]*o.data[8];
+            data[6] = t1;
+            data[7] = t2;
+            data[8] = t3;
+        }
+
+
+        // *= - Multiplies this matrix in place by the given scalar.
+        void operator*=(const marb scalar)
+        {
+            data[0] *= scalar; data[1] *= scalar; data[2] *= scalar;
+            data[3] *= scalar; data[4] *= scalar; data[5] *= scalar;
+            data[6] *= scalar; data[7] *= scalar; data[8] *= scalar;
+        }
+
+
+        // += - Does a component-wise addition of this matrix and the given
+        // matrix.
+        void operator+=(const Matrix3 &o)
+        {
+            data[0] += o.data[0]; data[1] += o.data[1]; data[2] += o.data[2];
+            data[3] += o.data[3]; data[4] += o.data[4]; data[5] += o.data[5];
+            data[6] += o.data[6]; data[7] += o.data[7]; data[8] += o.data[8];
+        }
+
+        // Sets the matrix to be the inverse of the given matrix. Parameter is the matrix to invert.
         void SetInverse(const Matrix3 &m)
         {
             marb t4 = m.data[0]*m.data[4];
@@ -460,6 +508,15 @@ namespace marballs {
             Matrix3 result;
             result.SetTranspose(*this);
             return result;
+        }
+
+        Vector3 TransformTranspose(const Vector3 &vector) const
+        {
+            return Vector3(
+                vector.x * data[0] + vector.y * data[3] + vector.z * data[6],
+                vector.x * data[1] + vector.y * data[4] + vector.z * data[7],
+                vector.x * data[2] + vector.y * data[5] + vector.z * data[8]
+            );
         }
 
         // Sets this matrix to be the rotation matrix corresponding to the given quaternion.

@@ -151,34 +151,3 @@ void ParticleFakeSpring::UpdateForce(Particle* particle, marb duration)
     Vector3 accel = (target - position) * (1.0f / duration*duration) - particle->GetVelocity() * duration;
     particle->AddForce(accel * particle->GetMass());
 }
-
-//GRAVITY GENERATOR - OVERLOADED updateForce - Gravity generator for rigid bodies
-void Gravity::updateForce(RigidBody *body, marb duration)
-{
-	//Check for infinite mass
-	if (!body->hasFiniteMass()) return;
-	
-	//Apply the force to the body based on mass
-	body->addForce(gravity * body->getMass());
-}
-
-//SPRING FORCE GENERATOR - OVERLOADED updateForce - Generator for spring force
-void Sprint::updateForce(RigidBody *body, marb duration)
-{
-	//Calculate the two ends in space
-	Vector3 lws = body->getPointInWorldSpace(connectionPoint);
-	Vector3 ows = other->getPointInWorldSpace(otherConnectionPoint);
-	
-	//Calculate vector for spring
-	Vector3 force = lws - ows;
-	
-	//Calculate magnitude of the force
-	marb magnitude = force.magnitude();
-	magnitude = real_abs(magnitude - restLength);
-	magnitude *= sprintConstant;
-	
-	//Calculate overall force and apply
-	force.normalize();
-	force *= -magnitude;
-	body->addForceAtPoint(force, lws);
-}

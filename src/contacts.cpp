@@ -9,7 +9,10 @@
  *
  *************************************************************/
 
-#include "marballs.h"
+#include "contacts.h"
+#include <assert.h>
+
+using namespace marballs;
 
 /*
  * Constructs an arbitrary orthonormal basis for the contact.  This is
@@ -18,8 +21,7 @@
  * direction is generated from the contact normal, and the y and z
  * directionss are set so they are at right angles to it.
  */
-inline
-void Contact::CalculateContactBasis() {
+inline void Contact::CalculateContactBasis() {
 
     Vector3 contactTangent[2];
 
@@ -59,7 +61,7 @@ void Contact::CalculateContactBasis() {
     }
 
     // Make a matrix from the three vectors.
-    contactToWorld.setComponents(contactNormal, contactTangent[0], contactTangent[1]);
+    contactToWorld.SetComponents(contactNormal, contactTangent[0], contactTangent[1]);
 }
 
 // Build a vector that shows the change in velocity in
@@ -73,27 +75,27 @@ Vector3 Contact::CalculateFrictionlessImpulse(Matrix3 * inverseInertiaTensor) {
     // world space for a unit impulse in the direction of the contact
     // normal.
     Vector3 deltaVelWorld = relativeContactPosition[0] % contactNormal;
-    deltaVelWorld = inverseInertiaTensor[0].transform(deltaVelWorld);
+    deltaVelWorld = inverseInertiaTensor[0].Transform(deltaVelWorld);
     deltaVelWorld = deltaVelWorld % relativeContactPosition[0];
 
     // Work out the change in velocity in contact coordiantes.
     marb deltaVelocity = deltaVelWorld * contactNormal;
 
     // Add the linear component of velocity change
-    deltaVelocity += body[0]->getInverseMass();
+    deltaVelocity += body[0]->GetInverseMass();
 
     // Check if we need to the second body's data
     if (body[1]) {
         // Go through the same transformation sequence again
         Vector3 deltaVelWorld = relativeContactPosition[1] % contactNormal;
-        deltaVelWorld = inverseInertiaTensor[1].transform(deltaVelWorld);
+        deltaVelWorld = inverseInertiaTensor[1].Transform(deltaVelWorld);
         deltaVelWorld = deltaVelWorld % relativeContactPosition[1];
 
         // Add the change in velocity due to rotation
         deltaVelocity += deltaVelWorld * contactNormal;
 
         // Add the change in velocity due to linear motion
-        deltaVelocity += body[1]->getInverseMass();
+        deltaVelocity += body[1]->GetInverseMass();
     }
 
     // Calculate the required size of the impulse
@@ -107,45 +109,45 @@ void Contact::ApplyVelocityChange(Vector3 velocityChange[2], Vector3 rotationCha
     // Get hold of the inverse mass and inverse inertia tensor, both in
     // world coordinates.
     Matrix3 inverseInertiaTensor[2];
-    body[0]->getInverseInertiaTensorWorld(&inverseInertiaTensor[0]);
+    body[0]->GetInverseInertiaTensorWorld(&inverseInertiaTensor[0]);
     if (body[1])
-        body[1]->getInverseInertiaTensorWorld(&inverseInertiaTensor[1]);
+        body[1]->GetInverseInertiaTensorWorld(&inverseInertiaTensor[1]);
 
     // We will calculate the impulse for each contact axis
     Vector3 impulseContact;
 
     if (friction == (marb)0.0) {
         // Use the short format for frictionless contacts
-        impulseContact = calculateFrictionlessImpulse(inverseInertiaTensor);
+        impulseContact = CalculateFrictionlessImpulse(inverseInertiaTensor);
     } else {
         // Otherwise we may have impulses that aren't in the direction of the
         // contact, so we need the more complex version.
-        impulseContact = calculateFrictionImpulse(inverseInertiaTensor);
+        impulseContact = CalculateFrictionImpulse(inverseInertiaTensor);
     }
 
     // Convert impulse to world coordinates
-    Vector3 impulse = contactToWorld.transform(impulseContact);
+    Vector3 impulse = contactToWorld.Transform(impulseContact);
 
     // Split in the impulse into linear and rotational components
     Vector3 impulsiveTorque = relativeContactPosition[0] % impulse;
-    rotationChange[0] = inverseInertiaTensor[0].transform(impulsiveTorque);
-    velocityChange[0].clear();
-    velocityChange[0].addScaledVector(impulse, body[0]->getInverseMass());
+    rotationChange[0] = inverseInertiaTensor[0].Transform(impulsiveTorque);
+    velocityChange[0].Clear();
+    velocityChange[0].AddScaledVector(impulse, body[0]->GetInverseMass());
 
     // Apply the changes
-    body[0]->addVelocity(velocityChange[0]);
-    body[0]->addRotation(rotationChange[0]);
+    body[0]->AddVelocity(velocityChange[0]);
+    body[0]->AddRotation(rotationChange[0]);
 
     if (body[1]) {
         // Work out body one's linear and angular changes
         Vector3 impulsiveTorque = impulse % relativeContactPosition[1];
-        rotationChange[1] = inverseInertiaTensor[1].transform(impulsiveTorque);
-        velocityChange[1].clear();
-        velocityChange[1].addScaledVector(impulse, -body[1]->getInverseMass());
+        rotationChange[1] = inverseInertiaTensor[1].Transform(impulsiveTorque);
+        velocityChange[1].Clear();
+        velocityChange[1].AddScaledVector(impulse, -body[1]->GetInverseMass());
 
         // And apply them.
-        body[1]->addVelocity(velocityChange[1]);
-        body[1]->addRotation(rotationChange[1]);
+        body[1]->AddVelocity(velocityChange[1]);
+        body[1]->AddRotation(rotationChange[1]);
     }
 }
 
@@ -163,21 +165,21 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
     // of the contact normal, due to angular inertia only.
     for (unsigned i = 0; i < 2; i++) if (body[i]) {
         Matrix3 inverseInertiaTensor;
-        body[i]->getInverseInertiaTensorWorld(&inverseInertiaTensor);
+        body[i]->GetInverseInertiaTensorWorld(&inverseInertiaTensor);
 
         // Use the same procedure as for calculating frictionless
         // velocity change to work out the angular inertia.
         Vector3 angularInertiaWorld =
             relativeContactPosition[i] % contactNormal;
         angularInertiaWorld =
-            inverseInertiaTensor.transform(angularInertiaWorld);
+            inverseInertiaTensor.Transform(angularInertiaWorld);
         angularInertiaWorld =
             angularInertiaWorld % relativeContactPosition[i];
         angularInertia[i] =
             angularInertiaWorld * contactNormal;
 
         // The linear component is simply the inverse mass
-        linearInertia[i] = body[i]->getInverseMass();
+        linearInertia[i] = body[i]->GetInverseMass();
 
         // Keep track of the total inertia from all components
         totalInertia += linearInertia[i] + angularInertia[i];
@@ -200,15 +202,15 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
         // To avoid angular projections that are too great (when mass is large
         // but inertia tensor is small) limit the angular move.
         Vector3 projection = relativeContactPosition[i];
-        projection.addScaledVector(
+        projection.AddScaledVector(
             contactNormal,
-            -relativeContactPosition[i].scalarProduct(contactNormal)
+            -relativeContactPosition[i].ScalarProduct(contactNormal)
             );
 
         // Use the small angle approximation for the sine of the angle (i.e.
         // the magnitude would be sine(angularLimit) * projection.magnitude
         // but we approximate sine(angularLimit) to angularLimit).
-        marb maxMagnitude = angularLimit * projection.magnitude();
+        marb maxMagnitude = angularLimit * projection.Magnitude();
 
         if (angularMove[i] < -maxMagnitude) {
             marb totalMove = angularMove[i] + linearMove[i];
@@ -226,19 +228,19 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
         // calculate the desired rotation to achieve that.
         if (angularMove[i] == 0) {
             // Easy case - no angular movement means no rotation.
-            angularChange[i].clear();
+            angularChange[i].Clear();
 
         } else {
             // Work out the direction we'd like to rotate in.
             Vector3 targetAngularDirection =
-                relativeContactPosition[i].vectorProduct(contactNormal);
+                relativeContactPosition[i].VectorProduct(contactNormal);
 
             Matrix3 inverseInertiaTensor;
-            body[i]->getInverseInertiaTensorWorld(&inverseInertiaTensor);
+            body[i]->GetInverseInertiaTensorWorld(&inverseInertiaTensor);
 
             // Work out the direction we'd need to rotate to achieve that
             angularChange[i] =
-                inverseInertiaTensor.transform(targetAngularDirection) *
+                inverseInertiaTensor.Transform(targetAngularDirection) *
                 (angularMove[i] / angularInertia[i]);
         }
 
@@ -249,35 +251,34 @@ void Contact::ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange
         // Now we can start to apply the values we've calculated.
         // Apply the linear movement
         Vector3 pos;
-        body[i]->getPosition(&pos);
-        pos.addScaledVector(contactNormal, linearMove[i]);
-        body[i]->setPosition(pos);
+        body[i]->GetPosition(&pos);
+        pos.AddScaledVector(contactNormal, linearMove[i]);
+        body[i]->SetPosition(pos);
 
         // And the change in orientation
         Quaternion q;
-        body[i]->getOrientation(&q);
-        q.addScaledVector(angularChange[i], ((marb)1.0));
-        body[i]->setOrientation(q);
+        body[i]->GetOrientation(&q);
+        q.AddScaledVector(angularChange[i], ((marb)1.0));
+        body[i]->SetOrientation(q);
 
         // We need to calculate the derived data for any body that is
         // asleep, so that the changes are reflected in the object's
         // data. Otherwise the resolution will not change the position
         // of the object, and the next collision detection round will
         // have the same penetration.
-        if (!body[i]->getAwake()) body[i]->calculateDerivedData();
+        if (!body[i]->GetAwake()) body[i]->CalculateDerivedData();
     }
 }
 
-inline
-Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
+inline Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
     Vector3 impulseContact;
-    marb inverseMass = body[0]->getInverseMass();
+    marb inverseMass = body[0]->GetInverseMass();
 
     // The equivalent of a cross product in matrices is multiplication
     // by a skew symmetric matrix - we build the matrix for converting
     // between linear and angular quantities.
     Matrix3 impulseToTorque;
-    impulseToTorque.setSkewSymmetric(relativeContactPosition[0]);
+    impulseToTorque.SetSkewSymmetric(relativeContactPosition[0]);
 
     // Build the matrix to convert contact impulse to change in velocity
     // in world coordinates.
@@ -289,7 +290,7 @@ Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
     // Check if we need to add body two's data
     if (body[1]) {
         // Set the cross product matrix
-        impulseToTorque.setSkewSymmetric(relativeContactPosition[1]);
+        impulseToTorque.SetSkewSymmetric(relativeContactPosition[1]);
 
         // Calculate the velocity change matrix
         Matrix3 deltaVelWorld2 = impulseToTorque;
@@ -301,11 +302,11 @@ Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
         deltaVelWorld += deltaVelWorld2;
 
         // Add to the inverse mass
-        inverseMass += body[1]->getInverseMass();
+        inverseMass += body[1]->GetInverseMass();
     }
 
     // Do a change of basis to convert into contact coordinates.
-    Matrix3 deltaVelocity = contactToWorld.transpose();
+    Matrix3 deltaVelocity = contactToWorld.Transpose();
     deltaVelocity *= deltaVelWorld;
     deltaVelocity *= contactToWorld;
 
@@ -315,7 +316,7 @@ Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
     deltaVelocity.data[8] += inverseMass;
 
     // Invert to get the impulse needed per unit velocity
-    Matrix3 impulseMatrix = deltaVelocity.inverse();
+    Matrix3 impulseMatrix = deltaVelocity.Inverse();
 
     // Find the target velocities to kill
     Vector3 velKill(desiredDeltaVelocity,
@@ -323,7 +324,7 @@ Vector3 Contact::CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor) {
         -contactVelocity.z);
 
     // Find the impulse to kill target velocities
-    impulseContact = impulseMatrix.transform(velKill);
+    impulseContact = impulseMatrix.Transform(velKill);
 
     // Check for exceeding friction
     marb planarImpulse = marb_sqrt(impulseContact.y*impulseContact.y + impulseContact.z*impulseContact.z);
@@ -365,7 +366,7 @@ void Contact::CalculateInternals(marb duration) {
         relativeContactPosition[1] = contactPoint - body[1]->GetPosition();
     }
     // Find the relative velocity of the bodies at the contact point.
-    contactVelocity = calculateLocalVelocity(0, duration);
+    contactVelocity = CalculateLocalVelocity(0, duration);
     if (body[1]) {
         contactVelocity -= CalculateLocalVelocity(1, duration);
     }
@@ -390,8 +391,8 @@ void Contact::SwapBodies() {
 Vector3 Contact::CalculateLocalVelocity(unsigned bodyIndex, marb duration) {
     RigidBody *thisBody = body[bodyIndex];
     // Work out the velocity of the contact point.
-    Vector3 velocity = thisBody->getRotation() % relativeContactPosition[bodyIndex];
-    velocity += thisBody->getVelocity();
+    Vector3 velocity = thisBody->GetRotation() % relativeContactPosition[bodyIndex];
+    velocity += thisBody->GetVelocity();
     // Turn the velocity into contact coordinates
     Vector3 contactVelocity = contactToWorld.TransformTranspose(velocity);
     // And return it.
@@ -403,7 +404,7 @@ void ContactResolver::PrepareContacts(Contact* contacts, unsigned numContacts, m
     Contact* lastContact = contacts + numContacts;
     for(Contact* contact=contacts; contact < lastContact; contact++) {
         // Calculate the internal contact data (inertia, basis, etc).
-        contact->calculateInternals(duration);
+        contact->CalculateInternals(duration);
     }
 }
 
@@ -429,7 +430,7 @@ void ContactResolver::AdjustPositions(Contact *c, unsigned numContacts, marb dur
         // Match the awake state at the contact.
         //c[index].matchAwakeState();
         // Resolve the penetration.
-        c[index].ApplyPositionChange(velocityChange, rotationChange, rotationAmount, max);//-positionEpsilon);
+        c[index].ApplyPositionChange(velocityChange, rotationChange, max);// rotationAmount);//-positionEpsilon);
 
         // Again this action may have changed the penetration of other bodies, so we update contacts.
         for(i = 0; i < numContacts; i++) {
@@ -468,11 +469,11 @@ void Contact::CalculateDesiredDeltaVelocity(marb duration) {
     marb velocityFromAcc = 0;
 
     if (body[0]->GetAwake()) {
-        velocityFromAcc += body[0]->getLastFrameAcceleration() * duration * contactNormal;
+        velocityFromAcc += body[0]->GetLastFrameAcceleration() * duration * contactNormal;
     }
 
     if (body[1] && body[1]->GetAwake()) {
-        velocityFromAcc -= body[1]->getLastFrameAcceleration() * duration * contactNormal;
+        velocityFromAcc -= body[1]->GetLastFrameAcceleration() * duration * contactNormal;
     }
 
     // If the velocity is very slow, limit the restitution

@@ -18,8 +18,8 @@
 * orientation.
 */
 
-#ifndef CONTACT_INCLUDED
-#define CONTACT_INCLUDED
+#ifndef CONTACTS_INCLUDED
+#define CONTACTS_INCLUDED
 
 #include "body.h"
 
@@ -55,6 +55,33 @@ namespace marballs {
             Vector3 relativeContactPosition[2]; // holds the world space position of the contact point relative to
                                                 // the center of each body.
                                                 // NOTE - this is set when CalculateInternals function is ran.
+
+            // CalculateFrictionlessImpulse - to be added
+            Vector3 CalculateFrictionlessImpulse(Matrix3 * inverseInertiaTensor);
+
+            // ApplyVelocityChange - to be added
+            void ApplyVelocityChange(Vector3 velocityChange[2], Vector3 rotationChange[2]);
+
+            // ApplyPositionChange - to be added
+            void ApplyPositionChange(Vector3 linearChange[2], Vector3 angularChange[2], marb penetration);
+
+            // CalculateFrictionImpulse- to be added
+            inline Vector3 CalculateFrictionImpulse(Matrix3 * inverseInertiaTensor);
+
+            // CalculateInternals - to be added
+            void CalculateInternals(marb duration);
+
+            // SwapBodies - to be added
+            void SwapBodies();
+
+            // CalculateLocalVelocity - to be added
+            Vector3 CalculateLocalVelocity(unsigned bodyIndex, marb duration);
+
+            // CalculateDesiredDeltaVelocity - to be added
+            void CalculateDesiredDeltaVelocity(marb duration);
+
+            // CalculateContactBasis
+            void CalculateContactBasis();
     };
     // NOTE:
     // The contact resolution routine. One resolver instance
@@ -63,13 +90,24 @@ namespace marballs {
 
     class ContactResolver {
         public:
-         void ResolveContacts(Contact *contactArray, unsigned numContacts, marb duration);
+            unsigned positionIterationsUsed; // Number of position iterations used last call
+
+            void ResolveContacts(Contact *contactArray, unsigned numContacts, marb duration);
 
         protected:
+            unsigned positionIterations; // TBD
+            marb positionEpsilon; // TBD
+
             // PrepareContacts - Sets up contacts so they are ready for processing.
             // Also checks to make sure internal data is configured correctly and
             // that it is the correct set of bodies alive.
             void PrepareContacts(Contact *contactArray, unsigned numContacts, marb duration);
+
+            // AdjustPositions - to be added
+            void AdjustPositions(Contact *c, unsigned numContacts, marb duration);
+
+            // AdjustVelocities - to be added
+            void AdjustVelocities(Contact *c, unsigned numContacts, marb duration);
     };
 
 } // end marballs namespace
