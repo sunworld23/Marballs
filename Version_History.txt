@@ -2,6 +2,10 @@
                                     ~ ~ ~ VERSION HISTORY ~ ~ ~
 ====================================================================================================
 
+November 19, 2014:
+    - Chris fixed some errors, mainly careless ones such as capitalization of functions, in the files pfgen.cpp,
+      contacts.h, contacts.cpp, engine_core.h
+      
 November 16, 2014:
     - Chris fixed some more formatting, everything Kyle highlighted should be good
 
