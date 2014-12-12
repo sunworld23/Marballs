@@ -1,0 +1,108 @@
+# depslib dependency file v1.0
+1418342209 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\app.cpp
+	<cstring>
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\app.h
+	<cstdlib>
+	"marballs.h"
+
+1413431984 c:\users\chris viqueira\documents\code\c++\bridgedemo\marballs.h
+	"decimal_precision.h"
+	"engine_core.h"
+	"random.h"
+	"particle.h"
+	"pcontacts.h"
+	"pworld.h"
+	"pfgen.h"
+	"plinks.h"
+
+1412183563 c:\users\chris viqueira\documents\code\c++\bridgedemo\decimal_precision.h
+	<float.h>
+
+1414072934 c:\users\chris viqueira\documents\code\c++\bridgedemo\engine_core.h
+	<math.h>
+	"decimal_precision.h"
+	<iostream>
+
+1413431984 c:\users\chris viqueira\documents\code\c++\bridgedemo\random.h
+	"engine_core.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\particle.h
+	"engine_core.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\pcontacts.h
+	"particle.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\pworld.h
+	"pfgen.h"
+	"plinks.h"
+
+1413431984 c:\users\chris viqueira\documents\code\c++\bridgedemo\pfgen.h
+	"engine_core.h"
+	"particle.h"
+	<vector>
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\plinks.h
+	"pcontacts.h"
+
+1413431984 c:\users\chris viqueira\documents\code\c++\bridgedemo\timing.h
+
+1414072958 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\engine_core.cpp
+	"engine_core.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\main.cpp
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\particle.cpp
+	<assert.h>
+	"marballs.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\pcontacts.cpp
+	"pcontacts.h"
+
+1413431984 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\pfgen.cpp
+	"pfgen.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\plinks.cpp
+	"plinks.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\pworld.cpp
+	<cstddef>
+	"pworld.h"
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\random.cpp
+	<cstdlib>
+	<ctime>
+	"random.h"
+
+1412019083 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\timing.cpp
+	"timing.h"
+	<stdlib.h>
+	<sys/time.h>
+	<windows.h>
+	<mmsystem.h>
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\bridgedemo\bridge.cpp
+	"marballs.h"
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+	<stdio.h>
+	<cassert>
+
+1413435955 c:\users\chris viqueira\documents\code\c++\bridgedemo\glut.h
+	<windows.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+	<GL/gl.h>
+
+1413858345 c:\users\chris viqueira\documents\code\c++\bridgedemo\ogl_headers.h
+	<GL/glut.h>
+	<gl/glut.h>
+

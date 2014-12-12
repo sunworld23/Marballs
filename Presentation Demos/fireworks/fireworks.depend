@@ -1,0 +1,63 @@
+# depslib dependency file v1.0
+1418342179 source:c:\users\chris viqueira\documents\code\c++\fireworks\app.cpp
+	<cstring>
+	<gl/glut.h>
+	"app.h"
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\app.h
+	<cstdlib>
+	"marballs.h"
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\marballs.h
+	"engine_core.h"
+	"particle.h"
+	"decimal_precision.h"
+	"random.h"
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\engine_core.h
+	<math.h>
+	"decimal_precision.h"
+	<iostream>
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\decimal_precision.h
+	<float.h>
+
+1411993763 c:\users\chris viqueira\documents\code\c++\fireworks\particle.h
+	"marballs.h"
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\random.h
+	"engine_core.h"
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\fireworks\engine_core.cpp
+	"engine_core.h"
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\fireworks\fireworks.cpp
+	<gl/glut.h>
+	"marballs.h"
+	"app.h"
+	"timing.h"
+	<stdio.h>
+
+1411960779 c:\users\chris viqueira\documents\code\c++\fireworks\timing.h
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\fireworks\main.cpp
+	<gl/glut.h>
+	"app.h"
+	"timing.h"
+
+1411993576 source:c:\users\chris viqueira\documents\code\c++\fireworks\particle.cpp
+	<assert.h>
+	"marballs.h"
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\fireworks\random.cpp
+	<cstdlib>
+	<ctime>
+	"random.h"
+
+1412019049 source:c:\users\chris viqueira\documents\code\c++\fireworks\timing.cpp
+	"timing.h"
+	<stdlib.h>
+	<sys/time.h>
+	<windows.h>
+	<mmsystem.h>
+

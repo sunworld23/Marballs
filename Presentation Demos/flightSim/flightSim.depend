@@ -1,0 +1,128 @@
+# depslib dependency file v1.0
+1413861945 source:c:\users\chris viqueira\documents\code\c++\flightsim\app.cpp
+	<cstring>
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\ogl_headers.h
+	<GL/glut.h>
+	<gl/glut.h>
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\app.h
+	<cstdlib>
+	"marballs.h"
+
+1414456272 c:\users\chris viqueira\documents\code\c++\flightsim\marballs.h
+	"decimal_precision.h"
+	"engine_core.h"
+	"random.h"
+	"particle.h"
+	"pcontacts.h"
+	"pworld.h"
+	"pfgen.h"
+	"plinks.h"
+	"fgen.h"
+	"world.h"
+	"body.h"
+
+1412183563 c:\users\chris viqueira\documents\code\c++\flightsim\decimal_precision.h
+	<float.h>
+
+1414445150 c:\users\chris viqueira\documents\code\c++\flightsim\engine_core.h
+	<math.h>
+	"decimal_precision.h"
+	<iostream>
+
+1413431984 c:\users\chris viqueira\documents\code\c++\flightsim\random.h
+	"engine_core.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\particle.h
+	"engine_core.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\pcontacts.h
+	"particle.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\pworld.h
+	"pfgen.h"
+	"plinks.h"
+
+1414455207 c:\users\chris viqueira\documents\code\c++\flightsim\pfgen.h
+	"engine_core.h"
+	"particle.h"
+	"body.h"
+	<vector>
+
+1414445150 c:\users\chris viqueira\documents\code\c++\flightsim\body.h
+	"engine_core.h"
+
+1413858345 c:\users\chris viqueira\documents\code\c++\flightsim\plinks.h
+	"pcontacts.h"
+
+1414445150 c:\users\chris viqueira\documents\code\c++\flightsim\fgen.h
+	"body.h"
+	"pfgen.h"
+	<vector>
+
+1414445150 c:\users\chris viqueira\documents\code\c++\flightsim\world.h
+	"body.h"
+
+1413431984 c:\users\chris viqueira\documents\code\c++\flightsim\timing.h
+
+1414456151 source:c:\users\chris viqueira\documents\code\c++\flightsim\body.cpp
+	"body.h"
+	<memory.h>
+	<assert.h>
+
+1414457538 source:c:\users\chris viqueira\documents\code\c++\flightsim\engine_core.cpp
+	"engine_core.h"
+
+1414456231 source:c:\users\chris viqueira\documents\code\c++\flightsim\fgen.cpp
+	"fgen.h"
+
+1414445263 source:c:\users\chris viqueira\documents\code\c++\flightsim\flightsim.cpp
+	"marballs.h"
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+	<stdio.h>
+	<cassert>
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\flightsim\main.cpp
+	"ogl_headers.h"
+	"app.h"
+	"timing.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\flightsim\particle.cpp
+	<assert.h>
+	"marballs.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\flightsim\pcontacts.cpp
+	"pcontacts.h"
+
+1414455507 source:c:\users\chris viqueira\documents\code\c++\flightsim\pfgen.cpp
+	"pfgen.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\flightsim\plinks.cpp
+	"plinks.h"
+
+1413858345 source:c:\users\chris viqueira\documents\code\c++\flightsim\pworld.cpp
+	<cstddef>
+	"pworld.h"
+
+1411960779 source:c:\users\chris viqueira\documents\code\c++\flightsim\random.cpp
+	<cstdlib>
+	<ctime>
+	"random.h"
+
+1412019083 source:c:\users\chris viqueira\documents\code\c++\flightsim\timing.cpp
+	"timing.h"
+	<stdlib.h>
+	<sys/time.h>
+	<windows.h>
+	<mmsystem.h>
+
+1414445150 source:c:\users\chris viqueira\documents\code\c++\flightsim\world.cpp
+	<cstdlib>
+	"world.h"
+

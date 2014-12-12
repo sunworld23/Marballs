@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="bridgeDemo" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/bridgeDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/bridgeDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add library="glew32" />
+			<Add library="glu32" />
+			<Add library="gdi32" />
+			<Add library="freeglut" />
+			<Add library="opengl32" />
+			<Add library="winmm" />
+		</Linker>
+		<Unit filename="app.cpp" />
+		<Unit filename="app.h" />
+		<Unit filename="bridge.cpp" />
+		<Unit filename="decimal_precision.h" />
+		<Unit filename="engine_core.cpp" />
+		<Unit filename="engine_core.h" />
+		<Unit filename="glut.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="marballs.h" />
+		<Unit filename="particle.cpp" />
+		<Unit filename="particle.h" />
+		<Unit filename="pcontacts.cpp" />
+		<Unit filename="pcontacts.h" />
+		<Unit filename="pfgen.cpp" />
+		<Unit filename="pfgen.h" />
+		<Unit filename="plinks.cpp" />
+		<Unit filename="plinks.h" />
+		<Unit filename="pworld.cpp" />
+		<Unit filename="pworld.h" />
+		<Unit filename="random.cpp" />
+		<Unit filename="random.h" />
+		<Unit filename="timing.cpp" />
+		<Unit filename="timing.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
